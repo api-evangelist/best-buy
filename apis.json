@@ -1,0 +1,70 @@
+{
+    "name": "Best Buy",
+    "description": "Best Buy Company Profile  With operations in the United States,  Canada and Mexico, Best Buy is a North  American retailer of technology and  entertainment products and services with  a commitment to growth and innovation.  The Best Buy family of brand...",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/158-best-buy-apis.jpg",
+    "tags": [
+        "api lifeycle",
+        "api provider",
+        "electronics",
+        "have api",
+        "plugins",
+        "retail store data",
+        "reviews",
+        "shopping reviews service"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/best-buy\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Best Buy APIs",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/158-best-buy-apis.jpg",
+            "humanURL": "http:\/\/www.bestbuy.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/best-buy-apis-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/best-buy-apis-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/api.remix.bestbuy.com\/"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/bestbuy"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/developer.bestbuy.com\/"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/bestbuy"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/BestBuy"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/BestBuyAPI"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/www.bestbuy.com\/"
+        }
+    ]
+}
