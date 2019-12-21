@@ -12,8 +12,8 @@
         "reviews",
         "shopping reviews service"
     ],
-    "created": "2019-12-19",
-    "modified": "2019-12-19",
+    "created": "2019-12-20",
+    "modified": "2019-12-20",
     "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/best-buy\/master\/apis.json",
     "specificationVersion": "0.14",
     "apis": [
@@ -27,17 +27,21 @@
             "properties": [
                 {
                     "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/best-buy-apis-openapi.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/best-buy\/master\/best-buy-apis-openapi.json"
                 },
                 {
                     "type": "x-postman-collecction",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/best-buy-apis-postman-collection.json"
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/best-buy\/master\/best-buy-apis-postman-collection.json"
                 }
             ]
         }
     ],
     "include": [],
     "x-common": [
+        {
+            "type": "APIs.json",
+            "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/apis.json"
+        },
         {
             "type": "Base",
             "url": "http:\/\/api.remix.bestbuy.com\/"
