@@ -1,7 +1,11 @@
 aid: best-buy
-url: https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.best-buy.com
+description: >-
+  Best Buy is a multinational consumer electronics retailer offering technology products,
+  services, and solutions through stores, online, and in-home consultations.
