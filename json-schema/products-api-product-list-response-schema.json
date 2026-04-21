@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-schema/products-api-product-list-response-schema.json",
+  "title": "ProductListResponse",
+  "description": "Paginated list of Best Buy products.",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "integer",
+      "description": "Starting index of returned results.",
+      "example": 1
+    },
+    "to": {
+      "type": "integer",
+      "description": "Ending index of returned results.",
+      "example": 10
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of matching products.",
+      "example": 125000
+    },
+    "currentPage": {
+      "type": "integer",
+      "description": "Current page number.",
+      "example": 1
+    },
+    "totalPages": {
+      "type": "integer",
+      "description": "Total number of pages available.",
+      "example": 12500
+    },
+    "queryTime": {
+      "type": "string",
+      "description": "Time taken to execute the query in seconds.",
+      "example": "0.023"
+    },
+    "totalTime": {
+      "type": "string",
+      "description": "Total response time in seconds.",
+      "example": "0.043"
+    },
+    "partial": {
+      "type": "boolean",
+      "description": "Whether the response is a partial result.",
+      "example": false
+    },
+    "canonicalUrl": {
+      "type": "string",
+      "description": "The canonical URL for this query.",
+      "example": "https://api.bestbuy.com/v1/products?format=json&pageSize=10"
+    },
+    "nextCursorMark": {
+      "type": "string",
+      "description": "Cursor mark for fetching the next page when using cursor-based pagination.",
+      "example": "AoE="
+    },
+    "products": {
+      "type": "array",
+      "description": "Array of product objects.",
+      "items": {
+        "$ref": "#/components/schemas/Product"
+      }
+    }
+  }
+}

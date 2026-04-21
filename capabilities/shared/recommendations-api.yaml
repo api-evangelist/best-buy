@@ -1,0 +1,200 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Best Buy Recommendations API"
+  description: >-
+    Customer behavior-powered product recommendations including trending, most viewed,
+    also viewed, and also bought products.
+  tags:
+    - Best Buy
+    - Recommendations
+    - Personalization
+    - Products
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      BEST_BUY_API_KEY: BEST_BUY_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: best-buy-recommendations
+      baseUri: https://api.bestbuy.com/v1
+      description: "Best Buy Recommendations API for behavior-based product suggestions."
+      authentication:
+        type: apikey
+        key: apiKey
+        value: "{{BEST_BUY_API_KEY}}"
+        placement: query
+      resources:
+        - name: recommendations
+          path: /products
+          description: "Product recommendation endpoints"
+          operations:
+            - name: get-trending-products
+              method: GET
+              description: "Top 10 products with highest view velocity (rolling 3-hour window)"
+              inputParameters:
+                - name: categoryId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter to a specific category"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-most-viewed-products
+              method: GET
+              description: "Top 10 most frequently viewed products (48-hour window)"
+              inputParameters:
+                - name: categoryId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter to a specific category"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-also-viewed-products
+              method: GET
+              description: "Products browsed alongside a specific SKU (30-day window)"
+              inputParameters:
+                - name: sku
+                  in: path
+                  type: integer
+                  required: true
+                  description: "SKU to get also-viewed recommendations for"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-also-bought-products
+              method: GET
+              description: "Products purchased together with a specific SKU (30-day window)"
+              inputParameters:
+                - name: sku
+                  in: path
+                  type: integer
+                  required: true
+                  description: "SKU to get also-bought recommendations for"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: best-buy-recommendations-rest
+      resources:
+        - path: /v1/trending
+          name: trending-products
+          description: "Get trending Best Buy products"
+          operations:
+            - method: GET
+              name: get-trending-products
+              description: "Get top trending products"
+              call: "best-buy-recommendations.get-trending-products"
+              with:
+                categoryId: "rest.categoryId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/most-viewed
+          name: most-viewed-products
+          description: "Get most viewed Best Buy products"
+          operations:
+            - method: GET
+              name: get-most-viewed-products
+              description: "Get most viewed products"
+              call: "best-buy-recommendations.get-most-viewed-products"
+              with:
+                categoryId: "rest.categoryId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/products/{sku}/also-viewed
+          name: also-viewed-products
+          description: "Get also-viewed product recommendations"
+          operations:
+            - method: GET
+              name: get-also-viewed-products
+              description: "Get also-viewed recommendations for a SKU"
+              call: "best-buy-recommendations.get-also-viewed-products"
+              with:
+                sku: "rest.sku"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/products/{sku}/also-bought
+          name: also-bought-products
+          description: "Get also-bought product recommendations"
+          operations:
+            - method: GET
+              name: get-also-bought-products
+              description: "Get also-bought recommendations for a SKU"
+              call: "best-buy-recommendations.get-also-bought-products"
+              with:
+                sku: "rest.sku"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: best-buy-recommendations-mcp
+      transport: http
+      tools:
+        - name: get-trending-products
+          description: "Get the top 10 trending Best Buy products by view velocity in the last 3 hours"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "best-buy-recommendations.get-trending-products"
+          with:
+            categoryId: "tools.categoryId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-most-viewed-products
+          description: "Get the top 10 most viewed Best Buy products over the last 48 hours"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "best-buy-recommendations.get-most-viewed-products"
+          with:
+            categoryId: "tools.categoryId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-also-viewed-products
+          description: "Get products frequently viewed alongside a specific Best Buy SKU"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "best-buy-recommendations.get-also-viewed-products"
+          with:
+            sku: "tools.sku"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-also-bought-products
+          description: "Get products frequently purchased together with a specific Best Buy SKU"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "best-buy-recommendations.get-also-bought-products"
+          with:
+            sku: "tools.sku"
+          outputParameters:
+            - type: object
+              mapping: "$."

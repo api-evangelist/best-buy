@@ -1,0 +1,20 @@
+{
+  "storeId": 281,
+  "name": "Best Buy - San Francisco",
+  "longName": "Best Buy San Francisco - 1717 Harrison St",
+  "address": "1717 Harrison St",
+  "address2": "",
+  "city": "San Francisco",
+  "state": "CA",
+  "zipcode": "94103",
+  "phone": "415-626-9682",
+  "lat": 37.771,
+  "lng": -122.411,
+  "distance": 0.8,
+  "storeType": "Big Box",
+  "hours": "Mon-Sat 10am-8pm, Sun 11am-7pm",
+  "gmtOffset": -8,
+  "services": [
+    "sample-value"
+  ]
+}

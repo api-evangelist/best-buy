@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-structure/stores-api-store-list-response-structure.json",
+  "name": "StoreListResponse",
+  "description": "Paginated list of Best Buy store locations.",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "int32",
+      "description": "Starting index of returned results.",
+      "example": 1
+    },
+    "to": {
+      "type": "int32",
+      "description": "Ending index of returned results.",
+      "example": 5
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of matching stores.",
+      "example": 1587
+    },
+    "currentPage": {
+      "type": "int32",
+      "description": "Current page number.",
+      "example": 1
+    },
+    "totalPages": {
+      "type": "int32",
+      "description": "Total number of pages available.",
+      "example": 159
+    },
+    "queryTime": {
+      "type": "string",
+      "description": "Time taken to execute the query in seconds.",
+      "example": "0.018"
+    },
+    "totalTime": {
+      "type": "string",
+      "description": "Total response time in seconds.",
+      "example": "0.032"
+    },
+    "stores": {
+      "type": "array",
+      "description": "Array of store objects.",
+      "items": {
+        "$ref": "#/components/schemas/Store"
+      }
+    }
+  }
+}

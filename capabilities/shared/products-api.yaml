@@ -1,0 +1,163 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Best Buy Products API"
+  description: >-
+    Access over one million Best Buy products with real-time pricing, availability,
+    specifications, images, and customer reviews.
+  tags:
+    - Best Buy
+    - Products
+    - Retail
+    - Electronics
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      BEST_BUY_API_KEY: BEST_BUY_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: best-buy-products
+      baseUri: https://api.bestbuy.com/v1
+      description: "Best Buy Products API for querying the product catalog."
+      authentication:
+        type: apikey
+        key: apiKey
+        value: "{{BEST_BUY_API_KEY}}"
+        placement: query
+      resources:
+        - name: products
+          path: /products
+          description: "Product catalog queries"
+          operations:
+            - name: list-products
+              method: GET
+              description: "Query the Best Buy product catalog with filtering and search"
+              inputParameters:
+                - name: show
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of attributes to return"
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of results per page (max 100)"
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number for pagination"
+                - name: sort
+                  in: query
+                  type: string
+                  required: false
+                  description: "Sort attribute and direction"
+                - name: search
+                  in: query
+                  type: string
+                  required: false
+                  description: "Keyword search across product attributes"
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response format (json or xml)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-product-by-sku
+              method: GET
+              description: "Retrieve a single product by SKU number"
+              inputParameters:
+                - name: sku
+                  in: path
+                  type: integer
+                  required: true
+                  description: "The Best Buy product SKU number"
+                - name: show
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of attributes to return"
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response format (json or xml)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: best-buy-products-rest
+      resources:
+        - path: /v1/products
+          name: products
+          description: "Query Best Buy product catalog"
+          operations:
+            - method: GET
+              name: list-products
+              description: "List and search Best Buy products"
+              call: "best-buy-products.list-products"
+              with:
+                search: "rest.search"
+                pageSize: "rest.pageSize"
+                page: "rest.page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/products/{sku}
+          name: product
+          description: "Get a single Best Buy product by SKU"
+          operations:
+            - method: GET
+              name: get-product-by-sku
+              description: "Get product details by SKU"
+              call: "best-buy-products.get-product-by-sku"
+              with:
+                sku: "rest.sku"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: best-buy-products-mcp
+      transport: http
+      tools:
+        - name: list-products
+          description: "Search and list Best Buy products with filtering and keyword search"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "best-buy-products.list-products"
+          with:
+            search: "tools.search"
+            pageSize: "tools.pageSize"
+            page: "tools.page"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-product-by-sku
+          description: "Get detailed product information for a specific Best Buy SKU"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "best-buy-products.get-product-by-sku"
+          with:
+            sku: "tools.sku"
+          outputParameters:
+            - type: object
+              mapping: "$."

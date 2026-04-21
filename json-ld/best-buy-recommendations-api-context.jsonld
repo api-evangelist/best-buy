@@ -1,0 +1,93 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "bb": "https://developer.bestbuy.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ErrorResponse": "bb:ErrorResponse",
+    "RecommendationsResponse": "bb:RecommendationsResponse",
+    "RecommendedProduct": "bb:RecommendedProduct",
+    "status": {
+      "@id": "bb:status",
+      "@type": "xsd:integer"
+    },
+    "error": {
+      "@id": "bb:error",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "bb:message",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "bb:metadata",
+      "@type": "xsd:string"
+    },
+    "resultSet": {
+      "@id": "bb:resultSet",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "bb:count",
+      "@type": "xsd:integer"
+    },
+    "results": {
+      "@id": "bb:results",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "sku": {
+      "@id": "bb:sku",
+      "@type": "xsd:integer"
+    },
+    "names": {
+      "@id": "bb:names",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "bb:title",
+      "@type": "xsd:string"
+    },
+    "images": {
+      "@id": "bb:images",
+      "@type": "xsd:string"
+    },
+    "standard": {
+      "@id": "bb:standard",
+      "@type": "xsd:string"
+    },
+    "prices": {
+      "@id": "bb:prices",
+      "@type": "xsd:string"
+    },
+    "regular": {
+      "@id": "bb:regular",
+      "@type": "xsd:double"
+    },
+    "current": {
+      "@id": "bb:current",
+      "@type": "xsd:double"
+    },
+    "links": {
+      "@id": "bb:links",
+      "@type": "xsd:string"
+    },
+    "product": {
+      "@id": "bb:product",
+      "@type": "xsd:string"
+    },
+    "web": {
+      "@id": "bb:web",
+      "@type": "xsd:string"
+    },
+    "addToCart": {
+      "@id": "bb:addToCart",
+      "@type": "xsd:string"
+    },
+    "rank": {
+      "@id": "bb:rank",
+      "@type": "xsd:integer"
+    }
+  }
+}

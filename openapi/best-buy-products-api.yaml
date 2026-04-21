@@ -1,0 +1,455 @@
+openapi: 3.0.3
+info:
+  title: Best Buy Products API
+  description: >-
+    Access over one million current and historical Best Buy products with real-time
+    pricing, availability, specifications, images, customer reviews, and categorization
+    data. Supports detailed queries by SKU, keyword search, and filtering across
+    all product attributes.
+  version: 1.0.0
+  contact:
+    url: https://developer.bestbuy.com
+  x-generated-from: documentation
+servers:
+  - url: https://api.bestbuy.com/v1
+    description: Best Buy API v1
+security:
+  - apiKey: []
+tags:
+  - name: Products
+    description: Product catalog queries and retrieval
+paths:
+  /products:
+    get:
+      operationId: listProducts
+      summary: Best Buy List Products
+      description: >-
+        Query the Best Buy product catalog with filtering, keyword search, pagination,
+        and sorting. Returns product data including pricing, availability, specifications,
+        images, and categorization.
+      tags:
+        - Products
+      parameters:
+        - name: apiKey
+          in: query
+          required: true
+          description: Your Best Buy developer API key.
+          schema:
+            type: string
+          example: YourAPIKey
+        - name: format
+          in: query
+          required: false
+          description: Response format - json or xml.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+            default: json
+          example: json
+        - name: show
+          in: query
+          required: false
+          description: Comma-separated list of attributes to return. Use 'all' for complete data.
+          schema:
+            type: string
+          example: sku,name,salePrice,onSale
+        - name: pageSize
+          in: query
+          required: false
+          description: Number of results per page. Maximum 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          example: 10
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          example: 1
+        - name: sort
+          in: query
+          required: false
+          description: Sort attribute and direction, e.g. salePrice.asc or name.dsc.
+          schema:
+            type: string
+          example: salePrice.asc
+        - name: search
+          in: query
+          required: false
+          description: Keyword search across product name, manufacturer, descriptions, and features.
+          schema:
+            type: string
+          example: laptop
+        - name: cursorMark
+          in: query
+          required: false
+          description: Cursor mark for iterating large datasets (10+ pages). Use * to initiate.
+          schema:
+            type: string
+          example: '*'
+      responses:
+        '200':
+          description: Successful response with product list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+              examples:
+                ListProducts200Example:
+                  summary: Default listProducts 200 response
+                  x-microcks-default: true
+                  value:
+                    from: 1
+                    to: 10
+                    total: 125000
+                    currentPage: 1
+                    totalPages: 12500
+                    queryTime: '0.023'
+                    totalTime: '0.043'
+                    partial: false
+                    canonicalUrl: https://api.bestbuy.com/v1/products?format=json&pageSize=10
+                    products:
+                      - sku: 1234567
+                        name: Sample Laptop 15" 16GB RAM
+                        regularPrice: 999.99
+                        salePrice: 849.99
+                        onSale: true
+                        manufacturer: SampleBrand
+                        modelNumber: SB-1234
+                        image: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg
+                        url: https://www.bestbuy.com/site/sample-laptop/1234567.p
+                        addToCartUrl: https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567
+                        inStoreAvailability: true
+                        onlineAvailability: true
+                        type: HardGood
+                        categoryPath:
+                          - id: abcat0500000
+                            name: Computers & Tablets
+        '400':
+          description: Bad request - invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /products/{sku}:
+    get:
+      operationId: getProductBySku
+      summary: Best Buy Get Product by SKU
+      description: >-
+        Retrieve a single Best Buy product by its SKU number with full product details
+        including pricing, availability, specifications, images, and categorization.
+      tags:
+        - Products
+      parameters:
+        - name: sku
+          in: path
+          required: true
+          description: The Best Buy product SKU number.
+          schema:
+            type: integer
+          example: 1234567
+        - name: apiKey
+          in: query
+          required: true
+          description: Your Best Buy developer API key.
+          schema:
+            type: string
+          example: YourAPIKey
+        - name: format
+          in: query
+          required: false
+          description: Response format - json or xml.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+            default: json
+          example: json
+        - name: show
+          in: query
+          required: false
+          description: Comma-separated list of attributes to return.
+          schema:
+            type: string
+          example: sku,name,salePrice,onSale,shortDescription
+      responses:
+        '200':
+          description: Successful response with product details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                GetProductBySku200Example:
+                  summary: Default getProductBySku 200 response
+                  x-microcks-default: true
+                  value:
+                    sku: 1234567
+                    name: Sample Laptop 15" 16GB RAM
+                    regularPrice: 999.99
+                    salePrice: 849.99
+                    onSale: true
+                    manufacturer: SampleBrand
+                    modelNumber: SB-1234
+                    shortDescription: High-performance laptop for everyday computing.
+                    longDescription: Detailed description of the laptop features and specifications.
+                    image: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg
+                    url: https://www.bestbuy.com/site/sample-laptop/1234567.p
+                    addToCartUrl: https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567
+                    inStoreAvailability: true
+                    onlineAvailability: true
+                    type: HardGood
+                    class: LAPTOPS/NOTEBOOKS
+                    classId: 539
+                    subclass: ALL LAPTOPS
+                    subclassId: 2408
+                    department: COMPUTERS
+                    departmentId: 3
+                    categoryPath:
+                      - id: abcat0500000
+                        name: Computers & Tablets
+                    customerReviewCount: 450
+                    customerReviewAverage: 4.5
+        '404':
+          description: Product not found for the given SKU.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key obtained by registering at developer.bestbuy.com.
+
+  schemas:
+    ProductListResponse:
+      title: ProductListResponse
+      type: object
+      description: Paginated list of Best Buy products.
+      properties:
+        from:
+          type: integer
+          description: Starting index of returned results.
+          example: 1
+        to:
+          type: integer
+          description: Ending index of returned results.
+          example: 10
+        total:
+          type: integer
+          description: Total number of matching products.
+          example: 125000
+        currentPage:
+          type: integer
+          description: Current page number.
+          example: 1
+        totalPages:
+          type: integer
+          description: Total number of pages available.
+          example: 12500
+        queryTime:
+          type: string
+          description: Time taken to execute the query in seconds.
+          example: '0.023'
+        totalTime:
+          type: string
+          description: Total response time in seconds.
+          example: '0.043'
+        partial:
+          type: boolean
+          description: Whether the response is a partial result.
+          example: false
+        canonicalUrl:
+          type: string
+          description: The canonical URL for this query.
+          example: https://api.bestbuy.com/v1/products?format=json&pageSize=10
+        nextCursorMark:
+          type: string
+          description: Cursor mark for fetching the next page when using cursor-based pagination.
+          example: AoE=
+        products:
+          type: array
+          description: Array of product objects.
+          items:
+            $ref: '#/components/schemas/Product'
+
+    Product:
+      title: Product
+      type: object
+      description: A Best Buy product with pricing, availability, and metadata.
+      properties:
+        sku:
+          type: integer
+          description: Unique Best Buy product identifier (SKU number).
+          example: 1234567
+        name:
+          type: string
+          description: Product display name.
+          example: Sample Laptop 15" 16GB RAM
+        regularPrice:
+          type: number
+          format: double
+          description: Regular (non-sale) price in USD.
+          example: 999.99
+        salePrice:
+          type: number
+          format: double
+          description: Current sale price in USD.
+          example: 849.99
+        onSale:
+          type: boolean
+          description: Whether the product is currently on sale.
+          example: true
+        manufacturer:
+          type: string
+          description: Product manufacturer or brand name.
+          example: SampleBrand
+        modelNumber:
+          type: string
+          description: Manufacturer model number.
+          example: SB-1234
+        shortDescription:
+          type: string
+          description: Brief product description.
+          example: High-performance laptop for everyday computing.
+        longDescription:
+          type: string
+          description: Detailed product description.
+          example: Detailed description of the laptop features and specifications.
+        image:
+          type: string
+          description: URL of the primary product image.
+          example: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg
+        url:
+          type: string
+          description: URL of the product page on bestbuy.com.
+          example: https://www.bestbuy.com/site/sample-laptop/1234567.p
+        addToCartUrl:
+          type: string
+          description: URL for adding this product to the shopping cart.
+          example: https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567
+        inStoreAvailability:
+          type: boolean
+          description: Whether the product is available for in-store purchase.
+          example: true
+        onlineAvailability:
+          type: boolean
+          description: Whether the product is available online.
+          example: true
+        type:
+          type: string
+          description: Product type (HardGood, Movie, Music, Game, Software, etc.).
+          example: HardGood
+        class:
+          type: string
+          description: Product class name.
+          example: LAPTOPS/NOTEBOOKS
+        classId:
+          type: integer
+          description: Product class identifier.
+          example: 539
+        subclass:
+          type: string
+          description: Product subclass name.
+          example: ALL LAPTOPS
+        subclassId:
+          type: integer
+          description: Product subclass identifier.
+          example: 2408
+        department:
+          type: string
+          description: Department name.
+          example: COMPUTERS
+        departmentId:
+          type: integer
+          description: Department identifier.
+          example: 3
+        categoryPath:
+          type: array
+          description: Hierarchical category path from root to this product's category.
+          items:
+            $ref: '#/components/schemas/CategoryRef'
+        customerReviewCount:
+          type: integer
+          description: Total number of customer reviews.
+          example: 450
+        customerReviewAverage:
+          type: number
+          format: double
+          description: Average customer review rating out of 5.
+          example: 4.5
+        priceUpdateDate:
+          type: string
+          format: date-time
+          description: Date and time the price was last updated.
+          example: '2026-04-01T10:00:00Z'
+
+    CategoryRef:
+      title: CategoryRef
+      type: object
+      description: A reference to a product category in the hierarchy.
+      properties:
+        id:
+          type: string
+          description: Category identifier.
+          example: abcat0500000
+        name:
+          type: string
+          description: Category display name.
+          example: Computers & Tablets
+
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error response returned when a request fails.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        error:
+          type: string
+          description: Error type or code.
+          example: Bad Request
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid query parameter provided.

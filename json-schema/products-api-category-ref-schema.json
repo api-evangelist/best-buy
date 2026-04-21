@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-schema/products-api-category-ref-schema.json",
+  "title": "CategoryRef",
+  "description": "A reference to a product category in the hierarchy.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Category identifier.",
+      "example": "abcat0500000"
+    },
+    "name": {
+      "type": "string",
+      "description": "Category display name.",
+      "example": "Computers & Tablets"
+    }
+  }
+}

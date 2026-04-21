@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-schema/recommendations-api-recommended-product-schema.json",
+  "title": "RecommendedProduct",
+  "description": "A recommended product with essential display attributes.",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "integer",
+      "description": "Product SKU number.",
+      "example": 1234567
+    },
+    "names": {
+      "type": "object",
+      "description": "Product name variations.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Product display title.",
+          "example": "Sample Laptop 15\" 16GB RAM"
+        }
+      }
+    },
+    "images": {
+      "type": "object",
+      "description": "Product image URLs.",
+      "properties": {
+        "standard": {
+          "type": "string",
+          "description": "Standard product image URL.",
+          "example": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg"
+        }
+      }
+    },
+    "prices": {
+      "type": "object",
+      "description": "Product pricing information.",
+      "properties": {
+        "regular": {
+          "type": "number",
+          "format": "double",
+          "description": "Regular price in USD.",
+          "example": 999.99
+        },
+        "current": {
+          "type": "number",
+          "format": "double",
+          "description": "Current (sale) price in USD.",
+          "example": 849.99
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "description": "Related URLs for the product.",
+      "properties": {
+        "product": {
+          "type": "string",
+          "description": "API URL for full product data.",
+          "example": "https://api.bestbuy.com/v1/products/1234567.json"
+        },
+        "web": {
+          "type": "string",
+          "description": "URL of the product page on bestbuy.com.",
+          "example": "https://www.bestbuy.com/site/sample-laptop/1234567.p"
+        },
+        "addToCart": {
+          "type": "string",
+          "description": "URL for adding to cart.",
+          "example": "https://www.bestbuy.com/cart/api/v1/addToCart"
+        }
+      }
+    },
+    "rank": {
+      "type": "integer",
+      "description": "Rank position in the recommendation list.",
+      "example": 1
+    }
+  }
+}

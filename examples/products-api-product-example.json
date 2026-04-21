@@ -1,0 +1,29 @@
+{
+  "sku": 1234567,
+  "name": "Sample Laptop 15\" 16GB RAM",
+  "regularPrice": 999.99,
+  "salePrice": 849.99,
+  "onSale": true,
+  "manufacturer": "SampleBrand",
+  "modelNumber": "SB-1234",
+  "shortDescription": "High-performance laptop for everyday computing.",
+  "longDescription": "Detailed description of the laptop features and specifications.",
+  "image": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg",
+  "url": "https://www.bestbuy.com/site/sample-laptop/1234567.p",
+  "addToCartUrl": "https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567",
+  "inStoreAvailability": true,
+  "onlineAvailability": true,
+  "type": "HardGood",
+  "class": "LAPTOPS/NOTEBOOKS",
+  "classId": 539,
+  "subclass": "ALL LAPTOPS",
+  "subclassId": 2408,
+  "department": "COMPUTERS",
+  "departmentId": 3,
+  "categoryPath": [
+    "sample-value"
+  ],
+  "customerReviewCount": 450,
+  "customerReviewAverage": 4.5,
+  "priceUpdateDate": "2026-04-01T10:00:00Z"
+}

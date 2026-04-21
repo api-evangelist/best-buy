@@ -1,0 +1,378 @@
+openapi: 3.0.3
+info:
+  title: Best Buy Stores API
+  description: >-
+    Retrieve comprehensive store location and operational data for 1,587+ Best Buy
+    locations across the United States and Puerto Rico. Supports area-based searches
+    by postal code or latitude/longitude, store hours, services, and in-store product
+    availability.
+  version: 1.0.0
+  contact:
+    url: https://developer.bestbuy.com
+  x-generated-from: documentation
+servers:
+  - url: https://api.bestbuy.com/v1
+    description: Best Buy API v1
+security:
+  - apiKey: []
+tags:
+  - name: Stores
+    description: Best Buy store location and information queries
+paths:
+  /stores:
+    get:
+      operationId: listStores
+      summary: Best Buy List Stores
+      description: >-
+        Query all Best Buy store locations with filtering, area-based proximity
+        searches, and sorting. Returns store details including address, hours,
+        services, and operational information.
+      tags:
+        - Stores
+      parameters:
+        - name: apiKey
+          in: query
+          required: true
+          description: Your Best Buy developer API key.
+          schema:
+            type: string
+          example: YourAPIKey
+        - name: format
+          in: query
+          required: false
+          description: Response format - json or xml.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+            default: json
+          example: json
+        - name: show
+          in: query
+          required: false
+          description: Comma-separated list of attributes to return.
+          schema:
+            type: string
+          example: storeId,name,city,state,distance
+        - name: area
+          in: query
+          required: false
+          description: >-
+            Search for stores near a location. Format: area(postalCode,radius) or
+            area(latitude,longitude,radius). Default radius is 10 miles.
+          schema:
+            type: string
+          example: area(94103,25)
+        - name: pageSize
+          in: query
+          required: false
+          description: Number of results per page. Maximum 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          example: 10
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          example: 1
+        - name: sort
+          in: query
+          required: false
+          description: Sort attribute and direction, e.g. distance.asc.
+          schema:
+            type: string
+          example: distance.asc
+      responses:
+        '200':
+          description: Successful response with store list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreListResponse'
+              examples:
+                ListStores200Example:
+                  summary: Default listStores 200 response
+                  x-microcks-default: true
+                  value:
+                    from: 1
+                    to: 5
+                    total: 1587
+                    currentPage: 1
+                    totalPages: 159
+                    queryTime: '0.018'
+                    totalTime: '0.032'
+                    stores:
+                      - storeId: 281
+                        name: Best Buy - San Francisco
+                        longName: Best Buy San Francisco - 1717 Harrison St
+                        address: 1717 Harrison St
+                        address2: ''
+                        city: San Francisco
+                        state: CA
+                        zipcode: '94103'
+                        phone: 415-626-9682
+                        lat: 37.771
+                        lng: -122.411
+                        distance: 0.8
+                        storeType: Big Box
+                        hours: Mon-Sat 10am-8pm, Sun 11am-7pm
+        '400':
+          description: Bad request - invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /stores/{storeId}:
+    get:
+      operationId: getStoreById
+      summary: Best Buy Get Store by ID
+      description: >-
+        Retrieve detailed information for a specific Best Buy store including address,
+        hours, services, and operational attributes.
+      tags:
+        - Stores
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          description: The unique Best Buy store identifier.
+          schema:
+            type: integer
+          example: 281
+        - name: apiKey
+          in: query
+          required: true
+          description: Your Best Buy developer API key.
+          schema:
+            type: string
+          example: YourAPIKey
+        - name: format
+          in: query
+          required: false
+          description: Response format - json or xml.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+            default: json
+          example: json
+      responses:
+        '200':
+          description: Successful response with store details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+              examples:
+                GetStoreById200Example:
+                  summary: Default getStoreById 200 response
+                  x-microcks-default: true
+                  value:
+                    storeId: 281
+                    name: Best Buy - San Francisco
+                    longName: Best Buy San Francisco - 1717 Harrison St
+                    address: 1717 Harrison St
+                    address2: ''
+                    city: San Francisco
+                    state: CA
+                    zipcode: '94103'
+                    phone: 415-626-9682
+                    lat: 37.771
+                    lng: -122.411
+                    storeType: Big Box
+                    hours: Mon-Sat 10am-8pm, Sun 11am-7pm
+                    gmtOffset: -8
+                    services:
+                      - service: Geek Squad
+                      - service: Car Installation
+                      - service: Apple Shop
+        '404':
+          description: Store not found for the given store ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key obtained by registering at developer.bestbuy.com.
+
+  schemas:
+    StoreListResponse:
+      title: StoreListResponse
+      type: object
+      description: Paginated list of Best Buy store locations.
+      properties:
+        from:
+          type: integer
+          description: Starting index of returned results.
+          example: 1
+        to:
+          type: integer
+          description: Ending index of returned results.
+          example: 5
+        total:
+          type: integer
+          description: Total number of matching stores.
+          example: 1587
+        currentPage:
+          type: integer
+          description: Current page number.
+          example: 1
+        totalPages:
+          type: integer
+          description: Total number of pages available.
+          example: 159
+        queryTime:
+          type: string
+          description: Time taken to execute the query in seconds.
+          example: '0.018'
+        totalTime:
+          type: string
+          description: Total response time in seconds.
+          example: '0.032'
+        stores:
+          type: array
+          description: Array of store objects.
+          items:
+            $ref: '#/components/schemas/Store'
+
+    Store:
+      title: Store
+      type: object
+      description: A Best Buy store location with operational details.
+      properties:
+        storeId:
+          type: integer
+          description: Unique store identifier.
+          example: 281
+        name:
+          type: string
+          description: Short store name.
+          example: Best Buy - San Francisco
+        longName:
+          type: string
+          description: Full store name including address.
+          example: Best Buy San Francisco - 1717 Harrison St
+        address:
+          type: string
+          description: Street address of the store.
+          example: 1717 Harrison St
+        address2:
+          type: string
+          description: Secondary address line (suite, building, etc.).
+          example: ''
+        city:
+          type: string
+          description: City where the store is located.
+          example: San Francisco
+        state:
+          type: string
+          description: Two-letter US state abbreviation.
+          example: CA
+        zipcode:
+          type: string
+          description: US postal code.
+          example: '94103'
+        phone:
+          type: string
+          description: Store phone number.
+          example: 415-626-9682
+        lat:
+          type: number
+          format: double
+          description: Store latitude coordinate.
+          example: 37.771
+        lng:
+          type: number
+          format: double
+          description: Store longitude coordinate.
+          example: -122.411
+        distance:
+          type: number
+          format: double
+          description: Distance from the search location in miles (when area query is used).
+          example: 0.8
+        storeType:
+          type: string
+          description: Store format type.
+          enum:
+            - Big Box
+            - Express Kiosk
+            - Warehouse Sale
+            - Outlet Center
+            - PAC Standalone
+          example: Big Box
+        hours:
+          type: string
+          description: Store hours summary.
+          example: Mon-Sat 10am-8pm, Sun 11am-7pm
+        gmtOffset:
+          type: integer
+          description: GMT offset for the store's timezone.
+          example: -8
+        services:
+          type: array
+          description: Services offered at this store location.
+          items:
+            $ref: '#/components/schemas/StoreService'
+
+    StoreService:
+      title: StoreService
+      type: object
+      description: A service offered at a Best Buy store.
+      properties:
+        service:
+          type: string
+          description: Name of the service offered.
+          example: Geek Squad
+
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error response returned when a request fails.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        error:
+          type: string
+          description: Error type or code.
+          example: Bad Request
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid query parameter provided.

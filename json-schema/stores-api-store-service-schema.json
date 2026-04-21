@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-schema/stores-api-store-service-schema.json",
+  "title": "StoreService",
+  "description": "A service offered at a Best Buy store.",
+  "type": "object",
+  "properties": {
+    "service": {
+      "type": "string",
+      "description": "Name of the service offered.",
+      "example": "Geek Squad"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-structure/products-api-category-ref-structure.json",
+  "name": "CategoryRef",
+  "description": "A reference to a product category in the hierarchy.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Category identifier.",
+      "example": "abcat0500000"
+    },
+    "name": {
+      "type": "string",
+      "description": "Category display name.",
+      "example": "Computers & Tablets"
+    }
+  }
+}

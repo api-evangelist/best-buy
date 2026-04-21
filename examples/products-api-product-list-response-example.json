@@ -1,0 +1,15 @@
+{
+  "from": 1,
+  "to": 10,
+  "total": 125000,
+  "currentPage": 1,
+  "totalPages": 12500,
+  "queryTime": "0.023",
+  "totalTime": "0.043",
+  "partial": false,
+  "canonicalUrl": "https://api.bestbuy.com/v1/products?format=json&pageSize=10",
+  "nextCursorMark": "AoE=",
+  "products": [
+    "sample-value"
+  ]
+}

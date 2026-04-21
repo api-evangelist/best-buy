@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-structure/products-api-product-structure.json",
+  "name": "Product",
+  "description": "A Best Buy product with pricing, availability, and metadata.",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "int32",
+      "description": "Unique Best Buy product identifier (SKU number).",
+      "example": 1234567
+    },
+    "name": {
+      "type": "string",
+      "description": "Product display name.",
+      "example": "Sample Laptop 15\" 16GB RAM"
+    },
+    "regularPrice": {
+      "type": "double",
+      "description": "Regular (non-sale) price in USD.",
+      "example": 999.99
+    },
+    "salePrice": {
+      "type": "double",
+      "description": "Current sale price in USD.",
+      "example": 849.99
+    },
+    "onSale": {
+      "type": "boolean",
+      "description": "Whether the product is currently on sale.",
+      "example": true
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "Product manufacturer or brand name.",
+      "example": "SampleBrand"
+    },
+    "modelNumber": {
+      "type": "string",
+      "description": "Manufacturer model number.",
+      "example": "SB-1234"
+    },
+    "shortDescription": {
+      "type": "string",
+      "description": "Brief product description.",
+      "example": "High-performance laptop for everyday computing."
+    },
+    "longDescription": {
+      "type": "string",
+      "description": "Detailed product description.",
+      "example": "Detailed description of the laptop features and specifications."
+    },
+    "image": {
+      "type": "string",
+      "description": "URL of the primary product image.",
+      "example": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg"
+    },
+    "url": {
+      "type": "string",
+      "description": "URL of the product page on bestbuy.com.",
+      "example": "https://www.bestbuy.com/site/sample-laptop/1234567.p"
+    },
+    "addToCartUrl": {
+      "type": "string",
+      "description": "URL for adding this product to the shopping cart.",
+      "example": "https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567"
+    },
+    "inStoreAvailability": {
+      "type": "boolean",
+      "description": "Whether the product is available for in-store purchase.",
+      "example": true
+    },
+    "onlineAvailability": {
+      "type": "boolean",
+      "description": "Whether the product is available online.",
+      "example": true
+    },
+    "type": {
+      "type": "string",
+      "description": "Product type (HardGood, Movie, Music, Game, Software, etc.).",
+      "example": "HardGood"
+    },
+    "class": {
+      "type": "string",
+      "description": "Product class name.",
+      "example": "LAPTOPS/NOTEBOOKS"
+    },
+    "classId": {
+      "type": "int32",
+      "description": "Product class identifier.",
+      "example": 539
+    },
+    "subclass": {
+      "type": "string",
+      "description": "Product subclass name.",
+      "example": "ALL LAPTOPS"
+    },
+    "subclassId": {
+      "type": "int32",
+      "description": "Product subclass identifier.",
+      "example": 2408
+    },
+    "department": {
+      "type": "string",
+      "description": "Department name.",
+      "example": "COMPUTERS"
+    },
+    "departmentId": {
+      "type": "int32",
+      "description": "Department identifier.",
+      "example": 3
+    },
+    "categoryPath": {
+      "type": "array",
+      "description": "Hierarchical category path from root to this product's category.",
+      "items": {
+        "$ref": "#/components/schemas/CategoryRef"
+      }
+    },
+    "customerReviewCount": {
+      "type": "int32",
+      "description": "Total number of customer reviews.",
+      "example": 450
+    },
+    "customerReviewAverage": {
+      "type": "double",
+      "description": "Average customer review rating out of 5.",
+      "example": 4.5
+    },
+    "priceUpdateDate": {
+      "type": "datetime",
+      "description": "Date and time the price was last updated.",
+      "example": "2026-04-01T10:00:00Z"
+    }
+  }
+}

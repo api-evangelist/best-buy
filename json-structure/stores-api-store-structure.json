@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-structure/stores-api-store-structure.json",
+  "name": "Store",
+  "description": "A Best Buy store location with operational details.",
+  "type": "object",
+  "properties": {
+    "storeId": {
+      "type": "int32",
+      "description": "Unique store identifier.",
+      "example": 281
+    },
+    "name": {
+      "type": "string",
+      "description": "Short store name.",
+      "example": "Best Buy - San Francisco"
+    },
+    "longName": {
+      "type": "string",
+      "description": "Full store name including address.",
+      "example": "Best Buy San Francisco - 1717 Harrison St"
+    },
+    "address": {
+      "type": "string",
+      "description": "Street address of the store.",
+      "example": "1717 Harrison St"
+    },
+    "address2": {
+      "type": "string",
+      "description": "Secondary address line (suite, building, etc.).",
+      "example": ""
+    },
+    "city": {
+      "type": "string",
+      "description": "City where the store is located.",
+      "example": "San Francisco"
+    },
+    "state": {
+      "type": "string",
+      "description": "Two-letter US state abbreviation.",
+      "example": "CA"
+    },
+    "zipcode": {
+      "type": "string",
+      "description": "US postal code.",
+      "example": "94103"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Store phone number.",
+      "example": "415-626-9682"
+    },
+    "lat": {
+      "type": "double",
+      "description": "Store latitude coordinate.",
+      "example": 37.771
+    },
+    "lng": {
+      "type": "double",
+      "description": "Store longitude coordinate.",
+      "example": -122.411
+    },
+    "distance": {
+      "type": "double",
+      "description": "Distance from the search location in miles (when area query is used).",
+      "example": 0.8
+    },
+    "storeType": {
+      "type": "string",
+      "description": "Store format type.",
+      "enum": [
+        "Big Box",
+        "Express Kiosk",
+        "Warehouse Sale",
+        "Outlet Center",
+        "PAC Standalone"
+      ],
+      "example": "Big Box"
+    },
+    "hours": {
+      "type": "string",
+      "description": "Store hours summary.",
+      "example": "Mon-Sat 10am-8pm, Sun 11am-7pm"
+    },
+    "gmtOffset": {
+      "type": "int32",
+      "description": "GMT offset for the store's timezone.",
+      "example": -8
+    },
+    "services": {
+      "type": "array",
+      "description": "Services offered at this store location.",
+      "items": {
+        "$ref": "#/components/schemas/StoreService"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/json-structure/recommendations-api-error-response-structure.json",
+  "name": "ErrorResponse",
+  "description": "Error response returned when a request fails.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "int32",
+      "description": "HTTP status code.",
+      "example": 400
+    },
+    "error": {
+      "type": "string",
+      "description": "Error type or code.",
+      "example": "Bad Request"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable description of the error.",
+      "example": "Invalid query parameter provided."
+    }
+  }
+}

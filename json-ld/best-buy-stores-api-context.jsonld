@@ -1,0 +1,124 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "bb": "https://developer.bestbuy.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ErrorResponse": "bb:ErrorResponse",
+    "StoreListResponse": "bb:StoreListResponse",
+    "Store": "bb:Store",
+    "StoreService": "bb:StoreService",
+    "status": {
+      "@id": "bb:status",
+      "@type": "xsd:integer"
+    },
+    "error": {
+      "@id": "bb:error",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "bb:message",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "bb:from",
+      "@type": "xsd:integer"
+    },
+    "to": {
+      "@id": "bb:to",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "bb:total",
+      "@type": "xsd:integer"
+    },
+    "currentPage": {
+      "@id": "bb:currentPage",
+      "@type": "xsd:integer"
+    },
+    "totalPages": {
+      "@id": "bb:totalPages",
+      "@type": "xsd:integer"
+    },
+    "queryTime": {
+      "@id": "bb:queryTime",
+      "@type": "xsd:string"
+    },
+    "totalTime": {
+      "@id": "bb:totalTime",
+      "@type": "xsd:string"
+    },
+    "stores": {
+      "@id": "bb:stores",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "storeId": {
+      "@id": "bb:storeId",
+      "@type": "xsd:integer"
+    },
+    "name": "schema:name",
+    "longName": {
+      "@id": "bb:longName",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "bb:address",
+      "@type": "xsd:string"
+    },
+    "address2": {
+      "@id": "bb:address2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "bb:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "bb:state",
+      "@type": "xsd:string"
+    },
+    "zipcode": {
+      "@id": "bb:zipcode",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "bb:phone",
+      "@type": "xsd:string"
+    },
+    "lat": {
+      "@id": "bb:lat",
+      "@type": "xsd:double"
+    },
+    "lng": {
+      "@id": "bb:lng",
+      "@type": "xsd:double"
+    },
+    "distance": {
+      "@id": "bb:distance",
+      "@type": "xsd:double"
+    },
+    "storeType": {
+      "@id": "bb:storeType",
+      "@type": "xsd:string"
+    },
+    "hours": {
+      "@id": "bb:hours",
+      "@type": "xsd:string"
+    },
+    "gmtOffset": {
+      "@id": "bb:gmtOffset",
+      "@type": "xsd:integer"
+    },
+    "services": {
+      "@id": "bb:services",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "service": {
+      "@id": "bb:service",
+      "@type": "xsd:string"
+    }
+  }
+}

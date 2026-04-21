@@ -1,0 +1,235 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Best Buy"
+  description: >-
+    Unified vocabulary for the Best Buy developer API covering product catalog,
+    store locations, and recommendation resources across operational and capability dimensions.
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: best-buy-products
+      version: "1.0.0"
+      baseUrl: https://api.bestbuy.com/v1
+      status: active
+    - namespace: best-buy-stores
+      version: "1.0.0"
+      baseUrl: https://api.bestbuy.com/v1
+      status: active
+    - namespace: best-buy-recommendations
+      version: "1.0.0"
+      baseUrl: https://api.bestbuy.com/v1
+      status: active
+
+  resources:
+    - name: products
+      api: best-buy-products
+      actions:
+        - list
+        - get
+    - name: stores
+      api: best-buy-stores
+      actions:
+        - list
+        - get
+    - name: recommendations
+      api: best-buy-recommendations
+      actions:
+        - trending
+        - most-viewed
+        - also-viewed
+        - also-bought
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: trending
+      httpMethod: GET
+      pattern: query
+    - name: most-viewed
+      httpMethod: GET
+      pattern: query
+    - name: also-viewed
+      httpMethod: GET
+      pattern: query
+    - name: also-bought
+      httpMethod: GET
+      pattern: query
+
+  schemas:
+    core:
+      - name: Product
+        api: best-buy-products
+        description: A Best Buy product with pricing, availability, and metadata
+        keyProperties:
+          - sku
+          - name
+          - salePrice
+          - onSale
+          - inStoreAvailability
+          - onlineAvailability
+      - name: Store
+        api: best-buy-stores
+        description: A Best Buy store location with operational details
+        keyProperties:
+          - storeId
+          - name
+          - address
+          - city
+          - state
+          - hours
+          - storeType
+      - name: RecommendedProduct
+        api: best-buy-recommendations
+        description: A recommended product with display attributes
+        keyProperties:
+          - sku
+          - names
+          - prices
+          - rank
+
+  parameters:
+    pagination:
+      - name: pageSize
+        description: Number of results per page (max 100)
+      - name: page
+        description: Page number
+      - name: cursorMark
+        description: Cursor mark for large dataset iteration
+    identifiers:
+      - name: sku
+        description: Best Buy product SKU number
+      - name: storeId
+        description: Best Buy store identifier
+      - name: categoryId
+        description: Best Buy category identifier
+    filters:
+      - name: search
+        description: Keyword search across product attributes
+      - name: area
+        description: Proximity search by postal code or coordinates
+      - name: show
+        description: Attribute selection for response filtering
+      - name: sort
+        description: Sort attribute and direction
+
+  enums:
+    storeTypes:
+      - Big Box
+      - Express Kiosk
+      - Warehouse Sale
+      - Outlet Center
+      - PAC Standalone
+    responseFormats:
+      - json
+      - xml
+    productTypes:
+      - HardGood
+      - Movie
+      - Music
+      - Game
+      - Software
+
+  authentication:
+    schemes:
+      - type: apiKey
+        in: query
+        name: apiKey
+        description: API key obtained by registering at developer.bestbuy.com
+
+capability:
+  workflows:
+    - name: Retail Discovery
+      file: capabilities/retail-discovery.yaml
+      description: Product search, store lookup, and recommendations
+      apisComined:
+        - best-buy-products
+        - best-buy-stores
+        - best-buy-recommendations
+      toolCount: 8
+      personas:
+        - Developer
+        - Partner
+
+  personas:
+    - id: developer
+      name: Developer
+      description: Developer building retail integrations and shopping applications
+      workflows:
+        - Retail Discovery
+    - id: partner
+      name: Partner
+      description: Authorized Best Buy commerce partner building shopping experiences
+      workflows:
+        - Retail Discovery
+
+  domains:
+    - name: Product Catalog
+      description: Product search, filtering, and attribute retrieval
+      resources:
+        - products
+    - name: Store Operations
+      description: Store location, hours, and services
+      resources:
+        - stores
+    - name: Personalization
+      description: Behavioral recommendations and trending data
+      resources:
+        - recommendations
+
+  namespaces:
+    - namespace: best-buy-products
+      type: consumed
+    - namespace: best-buy-stores
+      type: consumed
+    - namespace: best-buy-recommendations
+      type: consumed
+    - namespace: retail-discovery-api
+      type: rest-exposed
+      port: 8080
+    - namespace: retail-discovery-mcp
+      type: mcp-exposed
+      port: 9090
+
+  binds:
+    - name: BEST_BUY_API_KEY
+      description: Best Buy developer API key
+      workflows:
+        - Retail Discovery
+
+crossReference:
+  - resource: products
+    operations:
+      - list-products
+      - get-product-by-sku
+    workflows:
+      - Retail Discovery
+    personas:
+      - Developer
+      - Partner
+  - resource: stores
+    operations:
+      - list-stores
+      - get-store-by-id
+    workflows:
+      - Retail Discovery
+    personas:
+      - Developer
+      - Partner
+  - resource: recommendations
+    operations:
+      - get-trending-products
+      - get-most-viewed-products
+      - get-also-viewed-products
+      - get-also-bought-products
+    workflows:
+      - Retail Discovery
+    personas:
+      - Developer
+      - Partner

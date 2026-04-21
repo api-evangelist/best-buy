@@ -1,0 +1,12 @@
+{
+  "from": 1,
+  "to": 5,
+  "total": 1587,
+  "currentPage": 1,
+  "totalPages": 159,
+  "queryTime": "0.018",
+  "totalTime": "0.032",
+  "stores": [
+    "sample-value"
+  ]
+}

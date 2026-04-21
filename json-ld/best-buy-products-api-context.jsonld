@@ -1,0 +1,169 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "bb": "https://developer.bestbuy.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CategoryRef": "bb:CategoryRef",
+    "ErrorResponse": "bb:ErrorResponse",
+    "ProductListResponse": "bb:ProductListResponse",
+    "Product": "bb:Product",
+    "id": {
+      "@id": "bb:id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "status": {
+      "@id": "bb:status",
+      "@type": "xsd:integer"
+    },
+    "error": {
+      "@id": "bb:error",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "bb:message",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "bb:from",
+      "@type": "xsd:integer"
+    },
+    "to": {
+      "@id": "bb:to",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "bb:total",
+      "@type": "xsd:integer"
+    },
+    "currentPage": {
+      "@id": "bb:currentPage",
+      "@type": "xsd:integer"
+    },
+    "totalPages": {
+      "@id": "bb:totalPages",
+      "@type": "xsd:integer"
+    },
+    "queryTime": {
+      "@id": "bb:queryTime",
+      "@type": "xsd:string"
+    },
+    "totalTime": {
+      "@id": "bb:totalTime",
+      "@type": "xsd:string"
+    },
+    "partial": {
+      "@id": "bb:partial",
+      "@type": "xsd:boolean"
+    },
+    "canonicalUrl": {
+      "@id": "bb:canonicalUrl",
+      "@type": "xsd:string"
+    },
+    "nextCursorMark": {
+      "@id": "bb:nextCursorMark",
+      "@type": "xsd:string"
+    },
+    "products": {
+      "@id": "bb:products",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "sku": {
+      "@id": "bb:sku",
+      "@type": "xsd:integer"
+    },
+    "regularPrice": {
+      "@id": "bb:regularPrice",
+      "@type": "xsd:double"
+    },
+    "salePrice": {
+      "@id": "bb:salePrice",
+      "@type": "xsd:double"
+    },
+    "onSale": {
+      "@id": "bb:onSale",
+      "@type": "xsd:boolean"
+    },
+    "manufacturer": {
+      "@id": "bb:manufacturer",
+      "@type": "xsd:string"
+    },
+    "modelNumber": {
+      "@id": "bb:modelNumber",
+      "@type": "xsd:string"
+    },
+    "shortDescription": {
+      "@id": "bb:shortDescription",
+      "@type": "xsd:string"
+    },
+    "longDescription": {
+      "@id": "bb:longDescription",
+      "@type": "xsd:string"
+    },
+    "image": {
+      "@id": "bb:image",
+      "@type": "xsd:string"
+    },
+    "url": "schema:url",
+    "addToCartUrl": {
+      "@id": "bb:addToCartUrl",
+      "@type": "xsd:string"
+    },
+    "inStoreAvailability": {
+      "@id": "bb:inStoreAvailability",
+      "@type": "xsd:boolean"
+    },
+    "onlineAvailability": {
+      "@id": "bb:onlineAvailability",
+      "@type": "xsd:boolean"
+    },
+    "type": {
+      "@id": "bb:type",
+      "@type": "xsd:string"
+    },
+    "class": {
+      "@id": "bb:class",
+      "@type": "xsd:string"
+    },
+    "classId": {
+      "@id": "bb:classId",
+      "@type": "xsd:integer"
+    },
+    "subclass": {
+      "@id": "bb:subclass",
+      "@type": "xsd:string"
+    },
+    "subclassId": {
+      "@id": "bb:subclassId",
+      "@type": "xsd:integer"
+    },
+    "department": {
+      "@id": "bb:department",
+      "@type": "xsd:string"
+    },
+    "departmentId": {
+      "@id": "bb:departmentId",
+      "@type": "xsd:integer"
+    },
+    "categoryPath": {
+      "@id": "bb:categoryPath",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerReviewCount": {
+      "@id": "bb:customerReviewCount",
+      "@type": "xsd:integer"
+    },
+    "customerReviewAverage": {
+      "@id": "bb:customerReviewAverage",
+      "@type": "xsd:double"
+    },
+    "priceUpdateDate": {
+      "@id": "bb:priceUpdateDate",
+      "@type": "xsd:dateTime"
+    }
+  }
+}
