@@ -1,0 +1,258 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Best Buy Recommendations API — Recommendations
+  description: 'Best Buy Recommendations API — Recommendations. 4 operations. Lead operation: Best Buy Get Most Viewed Products.
+    Self-contained Naftiko capability covering one Best Buy business surface.'
+  tags:
+  - Best Buy
+  - Recommendations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BEST_BUY_API_KEY: BEST_BUY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: recommendations-recommendations
+    baseUri: https://api.bestbuy.com/v1
+    description: Best Buy Recommendations API — Recommendations business capability. Self-contained, no shared references.
+    resources:
+    - name: products-mostViewed
+      path: /products/mostViewed
+      operations:
+      - name: getmostviewedproducts
+        method: GET
+        description: Best Buy Get Most Viewed Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: apiKey
+          in: query
+          type: string
+          description: Your Best Buy developer API key.
+          required: true
+        - name: categoryId
+          in: query
+          type: string
+          description: Filter most viewed products to a specific category.
+        - name: format
+          in: query
+          type: string
+          description: Response format - json only.
+    - name: products-trendingViewed
+      path: /products/trendingViewed
+      operations:
+      - name: gettrendingproducts
+        method: GET
+        description: Best Buy Get Trending Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: apiKey
+          in: query
+          type: string
+          description: Your Best Buy developer API key.
+          required: true
+        - name: categoryId
+          in: query
+          type: string
+          description: Filter trending products to a specific category.
+        - name: format
+          in: query
+          type: string
+          description: Response format - json only for recommendations.
+    - name: products-sku-alsoBought
+      path: /products/{sku}/alsoBought
+      operations:
+      - name: getalsoboughtproducts
+        method: GET
+        description: Best Buy Get Also Bought Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sku
+          in: path
+          type: integer
+          description: The SKU number to get also-bought recommendations for.
+          required: true
+        - name: apiKey
+          in: query
+          type: string
+          description: Your Best Buy developer API key.
+          required: true
+        - name: format
+          in: query
+          type: string
+          description: Response format - json only.
+    - name: products-sku-alsoViewed
+      path: /products/{sku}/alsoViewed
+      operations:
+      - name: getalsoviewedproducts
+        method: GET
+        description: Best Buy Get Also Viewed Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sku
+          in: path
+          type: integer
+          description: The SKU number to get also-viewed recommendations for.
+          required: true
+        - name: apiKey
+          in: query
+          type: string
+          description: Your Best Buy developer API key.
+          required: true
+        - name: format
+          in: query
+          type: string
+          description: Response format - json only.
+    authentication:
+      type: apikey
+      key: apiKey
+      value: '{{env.BEST_BUY_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: recommendations-recommendations-rest
+    port: 8080
+    description: REST adapter for Best Buy Recommendations API — Recommendations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/products/mostviewed
+      name: products-mostviewed
+      description: REST surface for products-mostViewed.
+      operations:
+      - method: GET
+        name: getmostviewedproducts
+        description: Best Buy Get Most Viewed Products
+        call: recommendations-recommendations.getmostviewedproducts
+        with:
+          apiKey: rest.apiKey
+          categoryId: rest.categoryId
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products/trendingviewed
+      name: products-trendingviewed
+      description: REST surface for products-trendingViewed.
+      operations:
+      - method: GET
+        name: gettrendingproducts
+        description: Best Buy Get Trending Products
+        call: recommendations-recommendations.gettrendingproducts
+        with:
+          apiKey: rest.apiKey
+          categoryId: rest.categoryId
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products/{sku}/alsobought
+      name: products-sku-alsobought
+      description: REST surface for products-sku-alsoBought.
+      operations:
+      - method: GET
+        name: getalsoboughtproducts
+        description: Best Buy Get Also Bought Products
+        call: recommendations-recommendations.getalsoboughtproducts
+        with:
+          sku: rest.sku
+          apiKey: rest.apiKey
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products/{sku}/alsoviewed
+      name: products-sku-alsoviewed
+      description: REST surface for products-sku-alsoViewed.
+      operations:
+      - method: GET
+        name: getalsoviewedproducts
+        description: Best Buy Get Also Viewed Products
+        call: recommendations-recommendations.getalsoviewedproducts
+        with:
+          sku: rest.sku
+          apiKey: rest.apiKey
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: recommendations-recommendations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Best Buy Recommendations API — Recommendations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: best-buy-get-most-viewed
+      description: Best Buy Get Most Viewed Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recommendations-recommendations.getmostviewedproducts
+      with:
+        apiKey: tools.apiKey
+        categoryId: tools.categoryId
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: best-buy-get-trending-products
+      description: Best Buy Get Trending Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recommendations-recommendations.gettrendingproducts
+      with:
+        apiKey: tools.apiKey
+        categoryId: tools.categoryId
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: best-buy-get-also-bought
+      description: Best Buy Get Also Bought Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recommendations-recommendations.getalsoboughtproducts
+      with:
+        sku: tools.sku
+        apiKey: tools.apiKey
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: best-buy-get-also-viewed
+      description: Best Buy Get Also Viewed Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recommendations-recommendations.getalsoviewedproducts
+      with:
+        sku: tools.sku
+        apiKey: tools.apiKey
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
