@@ -2,6 +2,7 @@ aid: best-buy
 url: https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/apis.yml
 name: Best Buy
 tags:
+  - Fortune 100
 - Retail
 - Consumer Electronics
 - E-Commerce
