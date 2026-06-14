@@ -1,0 +1,673 @@
+# Best Buy GraphQL Schema
+# Conceptual schema derived from Best Buy Open API (https://bestbuyapis.github.io/api-documentation/)
+# Not an official Best Buy endpoint.
+
+# ---------------------------------------------------------------------------
+# Root types
+# ---------------------------------------------------------------------------
+
+type Query {
+  product(sku: ID!): Product
+  products(query: ProductQuery): [Product!]!
+  category(id: ID!): ProductCategory
+  categories(parentId: ID): [ProductCategory!]!
+  store(id: ID!): Store
+  stores(query: StoreQuery): [Store!]!
+  recommendations(type: RecommendationType!, sku: ID, categoryId: ID): [Product!]!
+  openBoxItems(sku: ID, skus: [ID!], categoryId: ID): [OpenBoxItem!]!
+  deals(type: DealType): [Promotion!]!
+  apiKey(key: String!): APIKey
+}
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum RecommendationType {
+  TRENDING
+  MOST_VIEWED
+  ALSO_VIEWED
+  ALSO_BOUGHT
+  VIEWED_ULTIMATELY_BOUGHT
+}
+
+enum DealType {
+  DAILY_DEAL
+  WEEKLY_DEAL
+  DOOR_BUSTER
+}
+
+enum ConditionRating {
+  EXCELLENT
+  GOOD
+  FAIR
+  CERTIFIED_REFURBISHED
+}
+
+enum FulfillmentType {
+  SHIP_TO_HOME
+  SHIP_TO_STORE
+  IN_STORE_PICKUP
+  HOME_DELIVERY
+}
+
+enum MembershipStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  PENDING
+}
+
+enum ProtectionPlanType {
+  GEEK_SQUAD_PROTECTION
+  ACCIDENTAL_DAMAGE
+  MANUFACTURER_REPLACEMENT
+  TECH_SUPPORT
+}
+
+enum ShippingSpeed {
+  STANDARD
+  EXPEDITED
+  TWO_DAY
+  NEXT_DAY
+  SAME_DAY
+}
+
+# ---------------------------------------------------------------------------
+# Input types
+# ---------------------------------------------------------------------------
+
+input ProductQuery {
+  keyword: String
+  sku: ID
+  categoryId: ID
+  pageSize: Int
+  page: Int
+  sort: String
+  filter: String
+}
+
+input StoreQuery {
+  postalCode: String
+  latitude: Float
+  longitude: Float
+  distance: Float
+  pageSize: Int
+  page: Int
+}
+
+# ---------------------------------------------------------------------------
+# Product domain
+# ---------------------------------------------------------------------------
+
+type Product {
+  sku: ID!
+  name: String!
+  shortDescription: String
+  longDescription: String
+  type: String
+  modelNumber: String
+  upc: String
+  manufacturer: String
+  class: String
+  subclass: String
+  department: String
+  departmentId: String
+  classId: String
+  subclassId: String
+  categoryPath: [ProductCategory!]!
+  images: [ProductImage!]!
+  videos: [ProductVideo!]!
+  specs: [ProductSpec!]!
+  attributes: [Attribute!]!
+  colorOptions: [ColorOption!]!
+  price: Price
+  rating: ProductRating
+  reviews(pageSize: Int, page: Int): [CustomerReview!]!
+  reviewCount: Int
+  availability: Availability
+  openBoxItems: [OpenBoxItem!]!
+  recommendations(type: RecommendationType!): [Product!]!
+  promotions: [Promotion!]!
+  protectionPlans: [ProtectionPlan!]!
+  giftWrap: GiftWrap
+  financing: Financing
+  tradeIn: DeviceTradeIn
+  url: String
+  addToCartUrl: String
+  affiliateUrl: String
+  new: Boolean
+  digital: Boolean
+  preowned: Boolean
+  bundle: Boolean
+  clearance: Boolean
+  active: Boolean
+  freeShipping: Boolean
+  inStoreOnly: Boolean
+  onlineOnly: Boolean
+  details: ProductDetails
+}
+
+type ProductDetails {
+  sku: ID!
+  includedItemList: [String!]!
+  whatsInTheBox: String
+  warrantyParts: String
+  warrantyLabor: String
+  energyStarQualified: Boolean
+  ecoHighlights: [String!]!
+  countryOfOrigin: String
+  assemblyRequired: Boolean
+  batteryRequired: Boolean
+  batteryIncluded: Boolean
+}
+
+type ProductImage {
+  href: String!
+  primary: Boolean!
+  rank: Int
+  width: Int
+  height: Int
+  tags: [String!]!
+}
+
+type ProductVideo {
+  href: String!
+  title: String
+  length: Int
+  rank: Int
+  thumbnailHref: String
+}
+
+type ProductCategory {
+  id: ID!
+  name: String!
+  active: Boolean
+  path: [ProductCategory!]!
+  subCategories: [SubCategory!]!
+  products(query: ProductQuery): [Product!]!
+}
+
+type CategoryBrowse {
+  id: ID!
+  name: String!
+  url: String
+  active: Boolean
+  subCategories: [SubCategory!]!
+}
+
+type SubCategory {
+  id: ID!
+  name: String!
+  active: Boolean
+  url: String
+  products(query: ProductQuery): [Product!]!
+}
+
+type ProductRating {
+  averageScore: Float
+  count: Int
+  distribution: [RatingDistribution!]!
+}
+
+type RatingDistribution {
+  stars: Int!
+  count: Int!
+}
+
+type CustomerReview {
+  id: ID!
+  title: String
+  comment: String
+  rating: Int!
+  submittedDate: String
+  author: ReviewAuthor
+  isVerifiedPurchaser: Boolean
+  isFeatured: Boolean
+  helpfulVotes: Int
+  notHelpfulVotes: Int
+  pros: [String!]!
+  cons: [String!]!
+}
+
+type ReviewAuthor {
+  id: ID!
+  name: String
+  location: String
+  reviewCount: Int
+  badgeList: [String!]!
+}
+
+type ProductSpec {
+  name: String!
+  value: String!
+  category: String
+}
+
+type Attribute {
+  name: String!
+  value: String!
+  sequence: Int
+}
+
+type ColorOption {
+  name: String!
+  url: String
+  skuId: ID
+  value: String
+}
+
+# ---------------------------------------------------------------------------
+# Pricing domain
+# ---------------------------------------------------------------------------
+
+type Price {
+  regular: RegularPrice
+  sale: SalePrice
+  list: ListPrice
+  online: OnlinePrice
+  inStore: StorePrice
+  currency: String
+  priceWithEhf: Float
+  priceUpdateDate: String
+}
+
+type RegularPrice {
+  amount: Float!
+  currency: String
+}
+
+type SalePrice {
+  amount: Float!
+  currency: String
+  startDate: String
+  endDate: String
+}
+
+type ListPrice {
+  amount: Float!
+  currency: String
+}
+
+type OnlinePrice {
+  amount: Float!
+  currency: String
+  available: Boolean
+}
+
+type StorePrice {
+  amount: Float!
+  currency: String
+  storeId: ID
+}
+
+# ---------------------------------------------------------------------------
+# Availability domain
+# ---------------------------------------------------------------------------
+
+type Availability {
+  online: OnlineAvailability
+  inStore: InStoreAvailability
+  shipToHome: ShipToHomeAvailability
+  shipToStore: ShipToStoreAvailability
+}
+
+type InStoreAvailability {
+  available: Boolean!
+  storeId: ID
+  store: Store
+  quantity: Int
+  pickupToday: Boolean
+}
+
+type OnlineAvailability {
+  available: Boolean!
+  quantity: Int
+  releaseDate: String
+  backOrderable: Boolean
+  backOrderDate: String
+}
+
+type ShipToHomeAvailability {
+  available: Boolean!
+  quantity: Int
+  freeShipping: Boolean
+  estimatedDelivery: DeliveryEstimate
+}
+
+type ShipToStoreAvailability {
+  available: Boolean!
+  freeShipping: Boolean
+  estimatedDelivery: DeliveryEstimate
+}
+
+type DeliveryEstimate {
+  minDays: Int
+  maxDays: Int
+  minDate: String
+  maxDate: String
+  message: String
+}
+
+# ---------------------------------------------------------------------------
+# Store domain
+# ---------------------------------------------------------------------------
+
+type Store {
+  storeId: ID!
+  name: String!
+  type: String
+  address: StoreAddress!
+  hours: StoreHours!
+  details: StoreDetails
+  map: StoreMap
+  inventory(sku: ID!): StoreInventory
+  pickup(sku: ID!): StorePickup
+  services: [String!]!
+  phone: String
+  distance: Float
+  distanceUnit: String
+  open: Boolean
+}
+
+type StoreDetails {
+  storeId: ID!
+  services: [String!]!
+  departments: [String!]!
+  specialties: [String!]!
+  geekSquadAvailable: Boolean
+  autoTechAvailable: Boolean
+  appleShopAvailable: Boolean
+  microsoftShopAvailable: Boolean
+  samsungStudioAvailable: Boolean
+}
+
+type StoreHours {
+  monday: String
+  tuesday: String
+  wednesday: String
+  thursday: String
+  friday: String
+  saturday: String
+  sunday: String
+  gmtOffset: Float
+  timezone: String
+  openNow: Boolean
+  todayOpen: String
+  todayClose: String
+}
+
+type StoreAddress {
+  street1: String!
+  street2: String
+  city: String!
+  state: String!
+  zip: String!
+  country: String
+  fullAddress: String
+}
+
+type StoreMap {
+  storeId: ID!
+  latitude: Float
+  longitude: Float
+  googleMapsUrl: String
+}
+
+type StoreInventory {
+  storeId: ID!
+  sku: ID!
+  available: Boolean!
+  quantity: Int
+  pickupToday: Boolean
+  lastUpdated: String
+}
+
+type StorePickup {
+  storeId: ID!
+  sku: ID!
+  eligible: Boolean!
+  reservationUrl: String
+  estimatedPickupDate: String
+  readyInMinutes: Int
+}
+
+# ---------------------------------------------------------------------------
+# Commerce domain
+# ---------------------------------------------------------------------------
+
+type Order {
+  orderId: ID!
+  status: String!
+  items: [CartItem!]!
+  shipping: Shipping
+  totalAmount: Float
+  taxAmount: Float
+  currency: String
+  createdDate: String
+  updatedDate: String
+  fulfillmentType: FulfillmentType
+}
+
+type CartItem {
+  sku: ID!
+  product: Product
+  quantity: Int!
+  unitPrice: Float!
+  totalPrice: Float!
+  fulfillmentType: FulfillmentType
+  giftWrap: Boolean
+  giftMessage: String
+}
+
+type Shipping {
+  option: ShippingOption
+  address: StoreAddress
+  estimatedDelivery: DeliveryEstimate
+}
+
+type ShippingOption {
+  id: ID!
+  name: String!
+  speed: ShippingSpeed!
+  cost: Float!
+  currency: String
+  estimatedDelivery: DeliveryEstimate
+}
+
+# ---------------------------------------------------------------------------
+# Membership and rewards domain
+# ---------------------------------------------------------------------------
+
+type BestBuyPlus {
+  memberId: ID!
+  status: MembershipStatus!
+  startDate: String
+  expirationDate: String
+  benefits: [String!]!
+  renewal: PlusRenewal
+}
+
+type PlusMembership {
+  memberId: ID!
+  tier: String!
+  status: MembershipStatus!
+  joinDate: String
+  expirationDate: String
+  rewardsCertificates: [RewardsCertificate!]!
+  giftCards: [GiftCard!]!
+}
+
+type PlusRenewal {
+  memberId: ID!
+  renewalDate: String
+  renewalPrice: Float
+  currency: String
+  autoRenew: Boolean
+}
+
+type GiftCard {
+  cardNumber: ID!
+  balance: Float!
+  currency: String
+  expirationDate: String
+  purchaseDate: String
+}
+
+type RewardsCertificate {
+  certificateId: ID!
+  amount: Float!
+  currency: String
+  expirationDate: String
+  redeemable: Boolean
+  usageUrl: String
+}
+
+# ---------------------------------------------------------------------------
+# Promotions and deals
+# ---------------------------------------------------------------------------
+
+type Promotion {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  discountAmount: Float
+  discountPercent: Float
+  startDate: String
+  endDate: String
+  conditions: String
+  products: [Product!]!
+}
+
+type DailyDeal {
+  id: ID!
+  product: Product!
+  originalPrice: Float!
+  dealPrice: Float!
+  savings: Float!
+  savingsPercent: Float!
+  dealDate: String!
+  expiresAt: String!
+  quantityAvailable: Int
+}
+
+type WeeklyDeal {
+  id: ID!
+  product: Product!
+  originalPrice: Float!
+  dealPrice: Float!
+  savings: Float!
+  savingsPercent: Float!
+  startDate: String!
+  endDate: String!
+}
+
+type DoorBuster {
+  id: ID!
+  product: Product!
+  dealPrice: Float!
+  originalPrice: Float!
+  savings: Float!
+  availableDate: String!
+  expiresAt: String!
+  inStoreOnly: Boolean!
+  quantityLimit: Int
+}
+
+# ---------------------------------------------------------------------------
+# Open box and refurbished
+# ---------------------------------------------------------------------------
+
+type OpenBoxItem {
+  offerId: ID!
+  sku: ID!
+  product: Product
+  condition: ConditionRating!
+  conditionDescription: String
+  openBoxPrice: Float!
+  regularPrice: Float!
+  savings: Float!
+  savingsPercent: Float!
+  storeId: ID
+  store: Store
+  quantityAvailable: Int
+  lastUpdated: String
+  url: String
+}
+
+# ---------------------------------------------------------------------------
+# Services
+# ---------------------------------------------------------------------------
+
+type GiftWrap {
+  available: Boolean!
+  price: Float
+  currency: String
+  styles: [String!]!
+}
+
+type Financing {
+  available: Boolean!
+  plans: [FinancingPlan!]!
+}
+
+type FinancingPlan {
+  id: ID!
+  name: String!
+  minimumPurchase: Float
+  termMonths: Int
+  apr: Float
+  promotionalApr: Float
+  promotionalPeriodMonths: Int
+  details: String
+}
+
+type ProtectionPlan {
+  id: ID!
+  name: String!
+  type: ProtectionPlanType!
+  price: Float!
+  currency: String
+  termMonths: Int
+  description: String
+  coverageDetails: String
+  deductible: Float
+}
+
+type DeviceTradeIn {
+  eligible: Boolean!
+  estimatedValue: Float
+  currency: String
+  conditions: [TradeInCondition!]!
+  tradeInUrl: String
+}
+
+type TradeInCondition {
+  condition: String!
+  value: Float!
+  currency: String
+}
+
+# ---------------------------------------------------------------------------
+# API access control
+# ---------------------------------------------------------------------------
+
+type APIKey {
+  key: ID!
+  status: String!
+  rateLimit: Int
+  rateLimitWindow: String
+  requestsUsed: Int
+  requestsRemaining: Int
+  scopes: [String!]!
+  expirationDate: String
+}
+
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int
+  scope: String
+  issuedAt: String
+}
