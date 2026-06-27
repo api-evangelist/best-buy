@@ -31,7 +31,7 @@ apis:
     url: https://bestbuyapis.github.io/api-documentation/#products-api
   - type: OpenAPI
     url: openapi/best-buy-products-api.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/products-products.yaml
   - url: graphql/best-buy-graphql.md
     type: GraphQL
@@ -52,7 +52,7 @@ apis:
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
   - type: OpenAPI
     url: openapi/best-buy-stores-api.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/stores-stores.yaml
   description: Retrieve comprehensive store location and operational data for 1,587+
     Best Buy locations across the United States and Puerto Rico. Supports area-based
@@ -83,7 +83,7 @@ apis:
     url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
   - type: OpenAPI
     url: openapi/best-buy-recommendations-api.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/recommendations-recommendations.yaml
   description: Leverage customer behavior data to surface relevant products through
     trending products, most viewed, also viewed, also bought, and viewed-ultimately-bought
@@ -129,7 +129,7 @@ common:
   url: https://bestbuyapis.github.io/api-documentation/#user-guide
 - type: Authentication
   url: https://bestbuyapis.github.io/api-documentation/#authorization
-- type: SignUp
+- type: Signup
   url: https://developer.bestbuy.com
 - type: GitHubOrganization
   url: https://github.com/BestBuyAPIs
