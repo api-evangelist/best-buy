@@ -117,6 +117,10 @@ apis:
     product availability lookups, shipping cost calculations, and order creation supporting
     store pickup, ship-to-home, and home delivery fulfillment options.
 common:
+- type: DomainSecurity
+  url: security/best-buy-domain-security.yml
+- type: Authentication
+  url: authentication/best-buy-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/best-buy
 - type: Website
@@ -131,6 +135,8 @@ common:
   url: https://bestbuyapis.github.io/api-documentation/#authorization
 - type: Signup
   url: https://developer.bestbuy.com
+- type: Blog
+  url: https://corporate.bestbuy.com/feed/
 - type: GitHubOrganization
   url: https://github.com/BestBuyAPIs
 - type: GitHubRepository

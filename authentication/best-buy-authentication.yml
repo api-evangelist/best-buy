@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/best-buy-products-api.yaml, openapi/best-buy-recommendations-api.yaml, openapi/best-buy-stores-api.yaml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: apiKey
+  description: API key obtained by registering at developer.bestbuy.com.
+  sources:
+  - openapi/best-buy-products-api.yaml
+  - openapi/best-buy-recommendations-api.yaml
+  - openapi/best-buy-stores-api.yaml
