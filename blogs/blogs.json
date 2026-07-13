@@ -1,0 +1,21 @@
+{
+  "repo": "best-buy",
+  "feeds": [
+    {
+      "source": "https://corporate.bestbuy.com/feed/",
+      "feed_url": "https://corporate.bestbuy.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://developer.bestbuy.com",
+      "feed_url": "https://developer.bestbuy.com",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 17
+}
