@@ -117,6 +117,8 @@ apis:
     product availability lookups, shipping cost calculations, and order creation supporting
     store pickup, ship-to-home, and home delivery fulfillment options.
 common:
+- type: AgenticAccess
+  url: agentic-access/best-buy-agentic-access.yml
 - type: DomainSecurity
   url: security/best-buy-domain-security.yml
 - type: Authentication
