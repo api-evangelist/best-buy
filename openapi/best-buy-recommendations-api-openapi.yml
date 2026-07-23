@@ -1,55 +1,50 @@
 openapi: 3.0.3
 info:
-  title: Best Buy Recommendations API
-  description: >-
-    Leverage customer behavior data to surface relevant products through trending
-    products, most viewed, also viewed, also bought, and viewed-ultimately-bought
-    recommendation types. Supports queries by category ID or specific SKU.
+  title: Best Buy Products Recommendations API
+  description: Access over one million current and historical Best Buy products with real-time pricing, availability, specifications, images, customer reviews, and categorization data. Supports detailed queries by SKU, keyword search, and filtering across all product attributes.
   version: 1.0.0
   contact:
     url: https://developer.bestbuy.com
   x-generated-from: documentation
 servers:
-  - url: https://api.bestbuy.com/v1
-    description: Best Buy API v1
+- url: https://api.bestbuy.com/v1
+  description: Best Buy API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: Recommendations
-    description: Customer behavior-based product recommendations
+- name: Recommendations
+  description: Customer behavior-based product recommendations
 paths:
   /products/trendingViewed:
     get:
       operationId: getTrendingProducts
       summary: Best Buy Get Trending Products
-      description: >-
-        Returns the top 10 products with the highest view velocity over a rolling
-        3-hour window. Requires a minimum of 50 page views per hour to qualify.
+      description: Returns the top 10 products with the highest view velocity over a rolling 3-hour window. Requires a minimum of 50 page views per hour to qualify.
       tags:
-        - Recommendations
+      - Recommendations
       parameters:
-        - name: apiKey
-          in: query
-          required: true
-          description: Your Best Buy developer API key.
-          schema:
-            type: string
-          example: YourAPIKey
-        - name: categoryId
-          in: query
-          required: false
-          description: Filter trending products to a specific category.
-          schema:
-            type: string
-          example: abcat0500000
-        - name: format
-          in: query
-          required: false
-          description: Response format - json only for recommendations.
-          schema:
-            type: string
-            default: json
-          example: json
+      - name: apiKey
+        in: query
+        required: true
+        description: Your Best Buy developer API key.
+        schema:
+          type: string
+        example: YourAPIKey
+      - name: categoryId
+        in: query
+        required: false
+        description: Filter trending products to a specific category.
+        schema:
+          type: string
+        example: abcat0500000
+      - name: format
+        in: query
+        required: false
+        description: Response format - json only for recommendations.
+        schema:
+          type: string
+          default: json
+        example: json
       responses:
         '200':
           description: Successful response with trending products.
@@ -66,19 +61,19 @@ paths:
                       resultSet:
                         count: 10
                     results:
-                      - sku: 1234567
-                        names:
-                          title: Sample Laptop 15" 16GB RAM
-                        images:
-                          standard: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg
-                        prices:
-                          regular: 999.99
-                          current: 849.99
-                        links:
-                          product: https://api.bestbuy.com/v1/products/1234567.json
-                          web: https://www.bestbuy.com/site/sample-laptop/1234567.p
-                          addToCart: https://www.bestbuy.com/cart/api/v1/addToCart
-                        rank: 1
+                    - sku: 1234567
+                      names:
+                        title: Sample Laptop 15" 16GB RAM
+                      images:
+                        standard: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg
+                      prices:
+                        regular: 999.99
+                        current: 849.99
+                      links:
+                        product: https://api.bestbuy.com/v1/products/1234567.json
+                        web: https://www.bestbuy.com/site/sample-laptop/1234567.p
+                        addToCart: https://www.bestbuy.com/cart/api/v1/addToCart
+                      rank: 1
         '401':
           description: Unauthorized - missing or invalid API key.
           content:
@@ -88,39 +83,36 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
   /products/mostViewed:
     get:
       operationId: getMostViewedProducts
       summary: Best Buy Get Most Viewed Products
-      description: >-
-        Returns the top 10 most frequently viewed products. Data is refreshed every
-        2 hours using a 48-hour accumulation window.
+      description: Returns the top 10 most frequently viewed products. Data is refreshed every 2 hours using a 48-hour accumulation window.
       tags:
-        - Recommendations
+      - Recommendations
       parameters:
-        - name: apiKey
-          in: query
-          required: true
-          description: Your Best Buy developer API key.
-          schema:
-            type: string
-          example: YourAPIKey
-        - name: categoryId
-          in: query
-          required: false
-          description: Filter most viewed products to a specific category.
-          schema:
-            type: string
-          example: abcat0500000
-        - name: format
-          in: query
-          required: false
-          description: Response format - json only.
-          schema:
-            type: string
-            default: json
-          example: json
+      - name: apiKey
+        in: query
+        required: true
+        description: Your Best Buy developer API key.
+        schema:
+          type: string
+        example: YourAPIKey
+      - name: categoryId
+        in: query
+        required: false
+        description: Filter most viewed products to a specific category.
+        schema:
+          type: string
+        example: abcat0500000
+      - name: format
+        in: query
+        required: false
+        description: Response format - json only.
+        schema:
+          type: string
+          default: json
+        example: json
       responses:
         '200':
           description: Successful response with most viewed products.
@@ -137,19 +129,19 @@ paths:
                       resultSet:
                         count: 10
                     results:
-                      - sku: 2345678
-                        names:
-                          title: Sample Smartphone 128GB
-                        images:
-                          standard: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2345/2345678_sd.jpg
-                        prices:
-                          regular: 799.99
-                          current: 699.99
-                        links:
-                          product: https://api.bestbuy.com/v1/products/2345678.json
-                          web: https://www.bestbuy.com/site/sample-smartphone/2345678.p
-                          addToCart: https://www.bestbuy.com/cart/api/v1/addToCart
-                        rank: 1
+                    - sku: 2345678
+                      names:
+                        title: Sample Smartphone 128GB
+                      images:
+                        standard: https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2345/2345678_sd.jpg
+                      prices:
+                        regular: 799.99
+                        current: 699.99
+                      links:
+                        product: https://api.bestbuy.com/v1/products/2345678.json
+                        web: https://www.bestbuy.com/site/sample-smartphone/2345678.p
+                        addToCart: https://www.bestbuy.com/cart/api/v1/addToCart
+                      rank: 1
         '401':
           description: Unauthorized - missing or invalid API key.
           content:
@@ -159,39 +151,36 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
   /products/{sku}/alsoViewed:
     get:
       operationId: getAlsoViewedProducts
       summary: Best Buy Get Also Viewed Products
-      description: >-
-        Returns products browsed alongside a specific SKU, based on a 30-day
-        behavioral window of co-viewing patterns.
+      description: Returns products browsed alongside a specific SKU, based on a 30-day behavioral window of co-viewing patterns.
       tags:
-        - Recommendations
+      - Recommendations
       parameters:
-        - name: sku
-          in: path
-          required: true
-          description: The SKU number to get also-viewed recommendations for.
-          schema:
-            type: integer
-          example: 1234567
-        - name: apiKey
-          in: query
-          required: true
-          description: Your Best Buy developer API key.
-          schema:
-            type: string
-          example: YourAPIKey
-        - name: format
-          in: query
-          required: false
-          description: Response format - json only.
-          schema:
-            type: string
-            default: json
-          example: json
+      - name: sku
+        in: path
+        required: true
+        description: The SKU number to get also-viewed recommendations for.
+        schema:
+          type: integer
+        example: 1234567
+      - name: apiKey
+        in: query
+        required: true
+        description: Your Best Buy developer API key.
+        schema:
+          type: string
+        example: YourAPIKey
+      - name: format
+        in: query
+        required: false
+        description: Response format - json only.
+        schema:
+          type: string
+          default: json
+        example: json
       responses:
         '200':
           description: Successful response with also-viewed products.
@@ -208,13 +197,13 @@ paths:
                       resultSet:
                         count: 5
                     results:
-                      - sku: 3456789
-                        names:
-                          title: Sample Laptop Bag 15"
-                        prices:
-                          regular: 49.99
-                          current: 39.99
-                        rank: 1
+                    - sku: 3456789
+                      names:
+                        title: Sample Laptop Bag 15"
+                      prices:
+                        regular: 49.99
+                        current: 39.99
+                      rank: 1
         '404':
           description: No recommendations found for the given SKU.
           content:
@@ -230,39 +219,36 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
   /products/{sku}/alsoBought:
     get:
       operationId: getAlsoBoughtProducts
       summary: Best Buy Get Also Bought Products
-      description: >-
-        Returns products purchased together with a specific SKU, based on a 30-day
-        purchase history window.
+      description: Returns products purchased together with a specific SKU, based on a 30-day purchase history window.
       tags:
-        - Recommendations
+      - Recommendations
       parameters:
-        - name: sku
-          in: path
-          required: true
-          description: The SKU number to get also-bought recommendations for.
-          schema:
-            type: integer
-          example: 1234567
-        - name: apiKey
-          in: query
-          required: true
-          description: Your Best Buy developer API key.
-          schema:
-            type: string
-          example: YourAPIKey
-        - name: format
-          in: query
-          required: false
-          description: Response format - json only.
-          schema:
-            type: string
-            default: json
-          example: json
+      - name: sku
+        in: path
+        required: true
+        description: The SKU number to get also-bought recommendations for.
+        schema:
+          type: integer
+        example: 1234567
+      - name: apiKey
+        in: query
+        required: true
+        description: Your Best Buy developer API key.
+        schema:
+          type: string
+        example: YourAPIKey
+      - name: format
+        in: query
+        required: false
+        description: Response format - json only.
+        schema:
+          type: string
+          default: json
+        example: json
       responses:
         '200':
           description: Successful response with also-bought products.
@@ -279,13 +265,13 @@ paths:
                       resultSet:
                         count: 5
                     results:
-                      - sku: 4567890
-                        names:
-                          title: Sample Laptop Charger
-                        prices:
-                          regular: 79.99
-                          current: 59.99
-                        rank: 1
+                    - sku: 4567890
+                      names:
+                        title: Sample Laptop Charger
+                      prices:
+                        regular: 79.99
+                        current: 59.99
+                      rank: 1
         '404':
           description: No recommendations found for the given SKU.
           content:
@@ -301,38 +287,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: apiKey
-      description: API key obtained by registering at developer.bestbuy.com.
-
   schemas:
-    RecommendationsResponse:
-      title: RecommendationsResponse
-      type: object
-      description: Response containing recommended product list.
-      properties:
-        metadata:
-          type: object
-          description: Metadata about the result set.
-          properties:
-            resultSet:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  description: Number of results returned.
-                  example: 10
-        results:
-          type: array
-          description: Array of recommended product objects.
-          items:
-            $ref: '#/components/schemas/RecommendedProduct'
-
     RecommendedProduct:
       title: RecommendedProduct
       type: object
@@ -392,7 +348,6 @@ components:
           type: integer
           description: Rank position in the recommendation list.
           example: 1
-
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -410,3 +365,30 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Invalid query parameter provided.
+    RecommendationsResponse:
+      title: RecommendationsResponse
+      type: object
+      description: Response containing recommended product list.
+      properties:
+        metadata:
+          type: object
+          description: Metadata about the result set.
+          properties:
+            resultSet:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  description: Number of results returned.
+                  example: 10
+        results:
+          type: array
+          description: Array of recommended product objects.
+          items:
+            $ref: '#/components/schemas/RecommendedProduct'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key obtained by registering at developer.bestbuy.com.
