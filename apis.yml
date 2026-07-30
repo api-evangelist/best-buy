@@ -1,4 +1,18 @@
 aid: best-buy
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/best-buy.png
 url: https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/apis.yml
 name: Best Buy
 tags:
@@ -17,47 +31,6 @@ description: Best Buy is a multinational consumer electronics retailer offering 
   categories, recommendations, open box offers, and commerce capabilities for partners
   and developers building retail integrations and applications.
 apis:
-- aid: best-buy:products-api
-  name: Best Buy Products API
-  tags:
-  - Products
-  - Retail
-  - Electronics
-  - Pricing
-  - Inventory
-  humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
-  properties:
-  - type: Documentation
-    url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: OpenAPI
-    url: openapi/best-buy-products-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/products-products.yaml
-  - url: graphql/best-buy-graphql.md
-    type: GraphQL
-  description: Access over one million current and historical Best Buy products with
-    real-time pricing, availability, specifications, images, customer reviews, and
-    categorization data. Supports detailed queries by SKU, keyword search, and filtering
-    across all product attributes.
-- aid: best-buy:stores-api
-  name: Best Buy Stores API
-  tags:
-  - Stores
-  - Locations
-  - Retail
-  - Geolocation
-  humanURL: https://bestbuyapis.github.io/api-documentation/#stores-api
-  properties:
-  - type: Documentation
-    url: https://bestbuyapis.github.io/api-documentation/#stores-api
-  - type: OpenAPI
-    url: openapi/best-buy-stores-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/stores-stores.yaml
-  description: Retrieve comprehensive store location and operational data for 1,587+
-    Best Buy locations across the United States and Puerto Rico. Supports area-based
-    searches by postal code or latitude/longitude, store hours, services, and in-store
-    product availability.
 - aid: best-buy:categories-api
   name: Best Buy Categories API
   tags:
@@ -68,26 +41,10 @@ apis:
   properties:
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#categories-api
-  description: Navigate Best Buy's product taxonomy with access to 4,328+ product
-    categories. Browse hierarchical category paths from root to specific categories
-    and integrate with product searches for category-specific filtering.
-- aid: best-buy:recommendations-api
-  name: Best Buy Recommendations API
-  tags:
-  - Recommendations
-  - Personalization
-  - Products
-  humanURL: https://bestbuyapis.github.io/api-documentation/#recommendations-api
-  properties:
-  - type: Documentation
-    url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
-  - type: OpenAPI
-    url: openapi/best-buy-recommendations-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/recommendations-recommendations.yaml
-  description: Leverage customer behavior data to surface relevant products through
-    trending products, most viewed, also viewed, also bought, and viewed-ultimately-bought
-    recommendation types. Supports queries by category ID or specific SKU.
+  description: >-
+    Navigate Best Buy's product taxonomy with access to 4,328+ product categories. Browse hierarchical
+    category paths from root to specific categories and integrate with product searches for category-specific
+    filtering.
 - aid: best-buy:buying-options-api
   name: Best Buy Buying Options (Open Box) API
   tags:
@@ -99,9 +56,10 @@ apis:
   properties:
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#buying-options-api
-  description: Access discounted open box and Geek Squad certified refurbished merchandise
-    with ship-from-store fulfillment. Supports single SKU, batch queries up to 100
-    SKUs, and category-based discovery with condition ratings updated every 5 minutes.
+  description: >-
+    Access discounted open box and Geek Squad certified refurbished merchandise with ship-from-store fulfillment.
+    Supports single SKU, batch queries up to 100 SKUs, and category-based discovery with condition ratings
+    updated every 5 minutes.
 - aid: best-buy:commerce-api
   name: Best Buy Commerce API
   tags:
@@ -113,9 +71,79 @@ apis:
   properties:
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#commerce-api
-  description: Enable integrated shopping experiences for authorized partners with
-    product availability lookups, shipping cost calculations, and order creation supporting
-    store pickup, ship-to-home, and home delivery fulfillment options.
+  description: >-
+    Enable integrated shopping experiences for authorized partners with product availability lookups,
+    shipping cost calculations, and order creation supporting store pickup, ship-to-home, and home delivery
+    fulfillment options.
+- aid: best-buy:best-buy-products-api
+  name: Best Buy Products API
+  description: Product catalog queries and retrieval
+  humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/best-buy-products-api-openapi.yml
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#products-api
+  - type: X-NaftikoCapability
+    url: capabilities/products-products.yaml
+  - type: GraphQL
+    url: graphql/best-buy-graphql.md
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#stores-api
+  - type: X-NaftikoCapability
+    url: capabilities/stores-stores.yaml
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
+  - type: X-NaftikoCapability
+    url: capabilities/recommendations-recommendations.yaml
+- aid: best-buy:best-buy-recommendations-api
+  name: Best Buy Recommendations API
+  description: Customer behavior-based product recommendations
+  humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
+  tags:
+  - Recommendations
+  properties:
+  - type: OpenAPI
+    url: openapi/best-buy-recommendations-api-openapi.yml
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#products-api
+  - type: X-NaftikoCapability
+    url: capabilities/products-products.yaml
+  - type: GraphQL
+    url: graphql/best-buy-graphql.md
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#stores-api
+  - type: X-NaftikoCapability
+    url: capabilities/stores-stores.yaml
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
+  - type: X-NaftikoCapability
+    url: capabilities/recommendations-recommendations.yaml
+- aid: best-buy:best-buy-stores-api
+  name: Best Buy Stores API
+  description: Best Buy store location and information queries
+  humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/best-buy-stores-api-openapi.yml
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#products-api
+  - type: X-NaftikoCapability
+    url: capabilities/products-products.yaml
+  - type: GraphQL
+    url: graphql/best-buy-graphql.md
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#stores-api
+  - type: X-NaftikoCapability
+    url: capabilities/stores-stores.yaml
+  - type: Documentation
+    url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
+  - type: X-NaftikoCapability
+    url: capabilities/recommendations-recommendations.yaml
 common:
 - type: AgenticAccess
   url: agentic-access/best-buy-agentic-access.yml
