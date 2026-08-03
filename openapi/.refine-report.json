@@ -1,0 +1,18 @@
+{
+  "provider": "best-buy",
+  "sources": [
+    "best-buy-products-api-openapi.yml",
+    "best-buy-recommendations-api-openapi.yml",
+    "best-buy-stores-api-openapi.yml"
+  ],
+  "outputs": [
+    "best-buy-products-api-openapi.yml",
+    "best-buy-recommendations-api-openapi.yml",
+    "best-buy-stores-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
