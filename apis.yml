@@ -86,18 +86,12 @@ apis:
     url: openapi/best-buy-products-api-openapi.yml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: X-NaftikoCapability
-    url: capabilities/products-products.yaml
   - type: GraphQL
     url: graphql/best-buy-graphql.md
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
-  - type: X-NaftikoCapability
-    url: capabilities/stores-stores.yaml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
-  - type: X-NaftikoCapability
-    url: capabilities/recommendations-recommendations.yaml
 - aid: best-buy:best-buy-recommendations-api
   name: Best Buy Recommendations API
   description: Customer behavior-based product recommendations
@@ -109,18 +103,12 @@ apis:
     url: openapi/best-buy-recommendations-api-openapi.yml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: X-NaftikoCapability
-    url: capabilities/products-products.yaml
   - type: GraphQL
     url: graphql/best-buy-graphql.md
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
-  - type: X-NaftikoCapability
-    url: capabilities/stores-stores.yaml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
-  - type: X-NaftikoCapability
-    url: capabilities/recommendations-recommendations.yaml
 - aid: best-buy:best-buy-stores-api
   name: Best Buy Stores API
   description: Best Buy store location and information queries
@@ -132,19 +120,17 @@ apis:
     url: openapi/best-buy-stores-api-openapi.yml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: X-NaftikoCapability
-    url: capabilities/products-products.yaml
   - type: GraphQL
     url: graphql/best-buy-graphql.md
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
-  - type: X-NaftikoCapability
-    url: capabilities/stores-stores.yaml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
-  - type: X-NaftikoCapability
-    url: capabilities/recommendations-recommendations.yaml
 common:
+- type: IssueTracker
+  url: https://github.com/BestBuyAPIs/api-documentation/issues
+- type: ContributionGuide
+  url: https://github.com/BestBuyAPIs/api-documentation/blob/master/CONTRIBUTING.md
 - type: AgenticAccess
   url: agentic-access/best-buy-agentic-access.yml
 - type: DomainSecurity
