@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Best Buy Products Recommendations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Best Buy Get Trending Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bestbuy.com/v1/products/trendingViewed",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "YourAPIKey",
+                "type": "query",
+                "description": "Your Best Buy developer API key."
+              },
+              {
+                "name": "categoryId",
+                "value": "abcat0500000",
+                "type": "query",
+                "description": "Filter trending products to a specific category."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format - json only for recommendations."
+              }
+            ]
+          },
+          "docs": "Returns the top 10 products with the highest view velocity over a rolling 3-hour window. Requires a minimum of 50 page views per hour to qualify."
+        },
+        {
+          "info": {
+            "name": "Best Buy Get Most Viewed Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bestbuy.com/v1/products/mostViewed",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "YourAPIKey",
+                "type": "query",
+                "description": "Your Best Buy developer API key."
+              },
+              {
+                "name": "categoryId",
+                "value": "abcat0500000",
+                "type": "query",
+                "description": "Filter most viewed products to a specific category."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format - json only."
+              }
+            ]
+          },
+          "docs": "Returns the top 10 most frequently viewed products. Data is refreshed every 2 hours using a 48-hour accumulation window."
+        },
+        {
+          "info": {
+            "name": "Best Buy Get Also Viewed Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bestbuy.com/v1/products/:sku/alsoViewed",
+            "params": [
+              {
+                "name": "sku",
+                "value": "1234567",
+                "type": "path",
+                "description": "The SKU number to get also-viewed recommendations for."
+              },
+              {
+                "name": "apiKey",
+                "value": "YourAPIKey",
+                "type": "query",
+                "description": "Your Best Buy developer API key."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format - json only."
+              }
+            ]
+          },
+          "docs": "Returns products browsed alongside a specific SKU, based on a 30-day behavioral window of co-viewing patterns."
+        },
+        {
+          "info": {
+            "name": "Best Buy Get Also Bought Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bestbuy.com/v1/products/:sku/alsoBought",
+            "params": [
+              {
+                "name": "sku",
+                "value": "1234567",
+                "type": "path",
+                "description": "The SKU number to get also-bought recommendations for."
+              },
+              {
+                "name": "apiKey",
+                "value": "YourAPIKey",
+                "type": "query",
+                "description": "Your Best Buy developer API key."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format - json only."
+              }
+            ]
+          },
+          "docs": "Returns products purchased together with a specific SKU, based on a 30-day purchase history window."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

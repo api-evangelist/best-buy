@@ -1,0 +1,835 @@
+{
+  "item": [
+    {
+      "id": "c5cc49cb-af1f-429a-82f5-9d7af1baf877",
+      "name": "Recommendations",
+      "description": {
+        "content": "Customer behavior-based product recommendations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a963743-2990-466e-b3d7-ca130b6ac3c4",
+          "name": "Best Buy Get Trending Products",
+          "request": {
+            "name": "Best Buy Get Trending Products",
+            "description": {
+              "content": "Returns the top 10 products with the highest view velocity over a rolling 3-hour window. Requires a minimum of 50 page views per hour to qualify.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "trendingViewed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your Best Buy developer API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "description": "Filter trending products to a specific category."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format - json only for recommendations."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5c638ab-ce78-4d55-8841-717b88871334",
+              "name": "Successful response with trending products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "trendingViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "abcat0500000"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"resultSet\": {\n      \"count\": 10\n    }\n  },\n  \"results\": [\n    {\n      \"sku\": 1234567,\n      \"names\": {\n        \"title\": \"Sample Laptop 15\\\" 16GB RAM\"\n      },\n      \"images\": {\n        \"standard\": \"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg\"\n      },\n      \"prices\": {\n        \"regular\": 999.99,\n        \"current\": 849.99\n      },\n      \"links\": {\n        \"product\": \"https://api.bestbuy.com/v1/products/1234567.json\",\n        \"web\": \"https://www.bestbuy.com/site/sample-laptop/1234567.p\",\n        \"addToCart\": \"https://www.bestbuy.com/cart/api/v1/addToCart\"\n      },\n      \"rank\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d14072d1-a753-476c-9436-83e163320344",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "trendingViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "abcat0500000"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb426d94-e4fc-47a3-ae5c-1b59303dfe8a",
+          "name": "Best Buy Get Most Viewed Products",
+          "request": {
+            "name": "Best Buy Get Most Viewed Products",
+            "description": {
+              "content": "Returns the top 10 most frequently viewed products. Data is refreshed every 2 hours using a 48-hour accumulation window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "mostViewed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your Best Buy developer API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "description": "Filter most viewed products to a specific category."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format - json only."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b1ff43d-40d6-4764-9550-226621affd23",
+              "name": "Successful response with most viewed products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "mostViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "abcat0500000"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"resultSet\": {\n      \"count\": 10\n    }\n  },\n  \"results\": [\n    {\n      \"sku\": 2345678,\n      \"names\": {\n        \"title\": \"Sample Smartphone 128GB\"\n      },\n      \"images\": {\n        \"standard\": \"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2345/2345678_sd.jpg\"\n      },\n      \"prices\": {\n        \"regular\": 799.99,\n        \"current\": 699.99\n      },\n      \"links\": {\n        \"product\": \"https://api.bestbuy.com/v1/products/2345678.json\",\n        \"web\": \"https://www.bestbuy.com/site/sample-smartphone/2345678.p\",\n        \"addToCart\": \"https://www.bestbuy.com/cart/api/v1/addToCart\"\n      },\n      \"rank\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9a49306-2ff0-49ca-9531-d1a9d5529327",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "mostViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "abcat0500000"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "144a6fa3-412b-40b4-8874-c7cbc30c29b5",
+          "name": "Best Buy Get Also Viewed Products",
+          "request": {
+            "name": "Best Buy Get Also Viewed Products",
+            "description": {
+              "content": "Returns products browsed alongside a specific SKU, based on a 30-day behavioral window of co-viewing patterns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":sku",
+                "alsoViewed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your Best Buy developer API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format - json only."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "sku",
+                  "description": "(Required) The SKU number to get also-viewed recommendations for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc607d5f-8124-4248-a9c2-69d323421f59",
+              "name": "Successful response with also-viewed products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku",
+                    "alsoViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The SKU number to get also-viewed recommendations for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"resultSet\": {\n      \"count\": 5\n    }\n  },\n  \"results\": [\n    {\n      \"sku\": 3456789,\n      \"names\": {\n        \"title\": \"Sample Laptop Bag 15\\\"\"\n      },\n      \"prices\": {\n        \"regular\": 49.99,\n        \"current\": 39.99\n      },\n      \"rank\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af184db3-565b-4b22-985d-eac056408082",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku",
+                    "alsoViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The SKU number to get also-viewed recommendations for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac7e9a6b-4baa-4253-8206-4b35f0141df4",
+              "name": "No recommendations found for the given SKU.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku",
+                    "alsoViewed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The SKU number to get also-viewed recommendations for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "adafc651-09b8-4276-9928-6b5756a73eb3",
+          "name": "Best Buy Get Also Bought Products",
+          "request": {
+            "name": "Best Buy Get Also Bought Products",
+            "description": {
+              "content": "Returns products purchased together with a specific SKU, based on a 30-day purchase history window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":sku",
+                "alsoBought"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your Best Buy developer API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format - json only."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "sku",
+                  "description": "(Required) The SKU number to get also-bought recommendations for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e385b90-abe5-4f0f-8818-b02a2adac2e4",
+              "name": "Successful response with also-bought products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku",
+                    "alsoBought"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The SKU number to get also-bought recommendations for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"resultSet\": {\n      \"count\": 5\n    }\n  },\n  \"results\": [\n    {\n      \"sku\": 4567890,\n      \"names\": {\n        \"title\": \"Sample Laptop Charger\"\n      },\n      \"prices\": {\n        \"regular\": 79.99,\n        \"current\": 59.99\n      },\n      \"rank\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39f539a0-5592-4e1b-9af0-fe2cec915879",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku",
+                    "alsoBought"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The SKU number to get also-bought recommendations for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5ee12b8-e6fc-495b-bb02-f31c4dc5a640",
+              "name": "No recommendations found for the given SKU.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku",
+                    "alsoBought"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The SKU number to get also-bought recommendations for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bestbuy.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fa71285a-4735-44f7-af3d-ef277a2c2570",
+    "name": "Best Buy Products Recommendations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access over one million current and historical Best Buy products with real-time pricing, availability, specifications, images, customer reviews, and categorization data. Supports detailed queries by SKU, keyword search, and filtering across all product attributes.",
+      "type": "text/plain"
+    }
+  }
+}

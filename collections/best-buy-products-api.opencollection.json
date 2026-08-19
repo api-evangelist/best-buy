@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Best Buy Products API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Best Buy List Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bestbuy.com/v1/products",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "YourAPIKey",
+                "type": "query",
+                "description": "Your Best Buy developer API key."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format - json or xml."
+              },
+              {
+                "name": "show",
+                "value": "sku,name,salePrice,onSale",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return. Use 'all' for complete data."
+              },
+              {
+                "name": "pageSize",
+                "value": "10",
+                "type": "query",
+                "description": "Number of results per page. Maximum 100."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "sort",
+                "value": "salePrice.asc",
+                "type": "query",
+                "description": "Sort attribute and direction, e.g. salePrice.asc or name.dsc."
+              },
+              {
+                "name": "search",
+                "value": "laptop",
+                "type": "query",
+                "description": "Keyword search across product name, manufacturer, descriptions, and features."
+              },
+              {
+                "name": "cursorMark",
+                "value": "*",
+                "type": "query",
+                "description": "Cursor mark for iterating large datasets (10+ pages). Use * to initiate."
+              }
+            ]
+          },
+          "docs": "Query the Best Buy product catalog with filtering, keyword search, pagination, and sorting. Returns product data including pricing, availability, specifications, images, and categorization."
+        },
+        {
+          "info": {
+            "name": "Best Buy Get Product by SKU",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bestbuy.com/v1/products/:sku",
+            "params": [
+              {
+                "name": "sku",
+                "value": "1234567",
+                "type": "path",
+                "description": "The Best Buy product SKU number."
+              },
+              {
+                "name": "apiKey",
+                "value": "YourAPIKey",
+                "type": "query",
+                "description": "Your Best Buy developer API key."
+              },
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response format - json or xml."
+              },
+              {
+                "name": "show",
+                "value": "sku,name,salePrice,onSale,shortDescription",
+                "type": "query",
+                "description": "Comma-separated list of attributes to return."
+              }
+            ]
+          },
+          "docs": "Retrieve a single Best Buy product by its SKU number with full product details including pricing, availability, specifications, images, and categorization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

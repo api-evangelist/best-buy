@@ -1,0 +1,667 @@
+{
+  "item": [
+    {
+      "id": "2f2b8a24-4e38-457e-aee1-382fc597f61f",
+      "name": "Products",
+      "description": {
+        "content": "Product catalog queries and retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ad18684-ad71-4707-9efb-26bee88a7e6e",
+          "name": "Best Buy List Products",
+          "request": {
+            "name": "Best Buy List Products",
+            "description": {
+              "content": "Query the Best Buy product catalog with filtering, keyword search, pagination, and sorting. Returns product data including pricing, availability, specifications, images, and categorization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your Best Buy developer API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format - json or xml."
+                },
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attributes to return. Use 'all' for complete data."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Number of results per page. Maximum 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort attribute and direction, e.g. salePrice.asc or name.dsc."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Keyword search across product name, manufacturer, descriptions, and features."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursorMark",
+                  "value": "<string>",
+                  "description": "Cursor mark for iterating large datasets (10+ pages). Use * to initiate."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9884921d-967c-4307-b877-fd7a97f60722",
+              "name": "Successful response with product list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "salePrice.asc"
+                    },
+                    {
+                      "key": "search",
+                      "value": "laptop"
+                    },
+                    {
+                      "key": "cursorMark",
+                      "value": "*"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": 1,\n  \"to\": 10,\n  \"total\": 125000,\n  \"currentPage\": 1,\n  \"totalPages\": 12500,\n  \"queryTime\": \"0.023\",\n  \"totalTime\": \"0.043\",\n  \"partial\": false,\n  \"canonicalUrl\": \"https://api.bestbuy.com/v1/products?format=json&pageSize=10\",\n  \"products\": [\n    {\n      \"sku\": 1234567,\n      \"name\": \"Sample Laptop 15\\\" 16GB RAM\",\n      \"regularPrice\": 999.99,\n      \"salePrice\": 849.99,\n      \"onSale\": true,\n      \"manufacturer\": \"SampleBrand\",\n      \"modelNumber\": \"SB-1234\",\n      \"image\": \"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg\",\n      \"url\": \"https://www.bestbuy.com/site/sample-laptop/1234567.p\",\n      \"addToCartUrl\": \"https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567\",\n      \"inStoreAvailability\": true,\n      \"onlineAvailability\": true,\n      \"type\": \"HardGood\",\n      \"categoryPath\": [\n        {\n          \"id\": \"abcat0500000\",\n          \"name\": \"Computers & Tablets\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1f1aed5-cc07-4a2b-a89f-3f1881bba6d4",
+              "name": "Bad request - invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "salePrice.asc"
+                    },
+                    {
+                      "key": "search",
+                      "value": "laptop"
+                    },
+                    {
+                      "key": "cursorMark",
+                      "value": "*"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc02261c-cf7c-4e1a-857d-1f5ef1d897af",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "salePrice.asc"
+                    },
+                    {
+                      "key": "search",
+                      "value": "laptop"
+                    },
+                    {
+                      "key": "cursorMark",
+                      "value": "*"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b021d0a6-ed38-4d38-bca4-6d6526ded001",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "salePrice.asc"
+                    },
+                    {
+                      "key": "search",
+                      "value": "laptop"
+                    },
+                    {
+                      "key": "cursorMark",
+                      "value": "*"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ce5a22b-3b8e-4016-9adc-f107b82c311e",
+          "name": "Best Buy Get Product by SKU",
+          "request": {
+            "name": "Best Buy Get Product by SKU",
+            "description": {
+              "content": "Retrieve a single Best Buy product by its SKU number with full product details including pricing, availability, specifications, images, and categorization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":sku"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your Best Buy developer API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format - json or xml."
+                },
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attributes to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "sku",
+                  "description": "(Required) The Best Buy product SKU number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c46776fa-e8bd-4d26-805e-84d6f6e6978f",
+              "name": "Successful response with product details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale,shortDescription"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The Best Buy product SKU number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sku\": 1234567,\n  \"name\": \"Sample Laptop 15\\\" 16GB RAM\",\n  \"regularPrice\": 999.99,\n  \"salePrice\": 849.99,\n  \"onSale\": true,\n  \"manufacturer\": \"SampleBrand\",\n  \"modelNumber\": \"SB-1234\",\n  \"shortDescription\": \"High-performance laptop for everyday computing.\",\n  \"longDescription\": \"Detailed description of the laptop features and specifications.\",\n  \"image\": \"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/1234/1234567_sd.jpg\",\n  \"url\": \"https://www.bestbuy.com/site/sample-laptop/1234567.p\",\n  \"addToCartUrl\": \"https://www.bestbuy.com/cart/api/v1/addToCart?items%5B0%5D%5BskuId%5D=1234567\",\n  \"inStoreAvailability\": true,\n  \"onlineAvailability\": true,\n  \"type\": \"HardGood\",\n  \"class\": \"LAPTOPS/NOTEBOOKS\",\n  \"classId\": 539,\n  \"subclass\": \"ALL LAPTOPS\",\n  \"subclassId\": 2408,\n  \"department\": \"COMPUTERS\",\n  \"departmentId\": 3,\n  \"categoryPath\": [\n    {\n      \"id\": \"abcat0500000\",\n      \"name\": \"Computers & Tablets\"\n    }\n  ],\n  \"customerReviewCount\": 450,\n  \"customerReviewAverage\": 4.5\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "872d979c-1300-4707-ba15-bb714a26d5a7",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale,shortDescription"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The Best Buy product SKU number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e6e2d22-a201-4e35-8fee-e0d7263ba672",
+              "name": "Product not found for the given SKU.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":sku"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "YourAPIKey"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show",
+                      "value": "sku,name,salePrice,onSale,shortDescription"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "sku",
+                      "description": "(Required) The Best Buy product SKU number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"Invalid query parameter provided.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bestbuy.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f423e8f-c4c1-48a7-a413-5d8dbece8127",
+    "name": "Best Buy Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Access over one million current and historical Best Buy products with real-time pricing, availability, specifications, images, customer reviews, and categorization data. Supports detailed queries by SKU, keyword search, and filtering across all product attributes.",
+      "type": "text/plain"
+    }
+  }
+}
