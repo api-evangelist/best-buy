@@ -20,6 +20,13 @@ tags:
 - Retail
 - Consumer Electronics
 - E-Commerce
+- Product
+- Stores
+tags_raw:
+- Fortune 100
+- Retail
+- Consumer Electronics
+- E-Commerce
 - Products
 - Stores
 kind: company
@@ -34,6 +41,10 @@ apis:
 - aid: best-buy:categories-api
   name: Best Buy Categories API
   tags:
+  - Categories
+  - Taxonomy
+  - Product
+  tags_raw:
   - Categories
   - Taxonomy
   - Products
@@ -51,6 +62,11 @@ apis:
   - Open Box
   - Refurbished
   - Discounts
+  - Product
+  tags_raw:
+  - Open Box
+  - Refurbished
+  - Discounts
   - Products
   humanURL: https://bestbuyapis.github.io/api-documentation/#buying-options-api
   properties:
@@ -63,6 +79,11 @@ apis:
 - aid: best-buy:commerce-api
   name: Best Buy Commerce API
   tags:
+  - Commerce
+  - Order
+  - Fulfillment
+  - Partners
+  tags_raw:
   - Commerce
   - Orders
   - Fulfillment
@@ -80,6 +101,8 @@ apis:
   description: Product catalog queries and retrieval
   humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
