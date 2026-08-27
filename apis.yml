@@ -31,7 +31,7 @@ tags_raw:
 - Stores
 kind: company
 created: '2026-04-19'
-modified: '2026-05-19'
+modified: '2026-08-27'
 description: Best Buy is a multinational consumer electronics retailer offering technology
   products, services, and solutions through stores, online, and in-home consultations.
   Best Buy provides a developer API giving access to product data, store locations,
@@ -49,6 +49,7 @@ apis:
   - Taxonomy
   - Products
   humanURL: https://bestbuyapis.github.io/api-documentation/#categories-api
+  baseURL: https://api.bestbuy.com/v1
   properties:
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#categories-api
@@ -69,6 +70,7 @@ apis:
   - Discounts
   - Products
   humanURL: https://bestbuyapis.github.io/api-documentation/#buying-options-api
+  baseURL: https://api.bestbuy.com/v1
   properties:
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#buying-options-api
@@ -100,6 +102,7 @@ apis:
   name: Best Buy Products API
   description: Product catalog queries and retrieval
   humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
+  baseURL: https://api.bestbuy.com/v1
   tags:
   - Product
   tags_raw:
@@ -107,10 +110,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/best-buy-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/best-buy-products-overlay.yaml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: GraphQL
-    url: graphql/best-buy-graphql.md
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
   - type: Documentation
@@ -119,15 +122,16 @@ apis:
   name: Best Buy Recommendations API
   description: Customer behavior-based product recommendations
   humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
+  baseURL: https://api.bestbuy.com/v1
   tags:
   - Recommendations
   properties:
   - type: OpenAPI
     url: openapi/best-buy-recommendations-api-openapi.yml
+  - type: Overlay
+    url: overlays/best-buy-recommendations-overlay.yaml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: GraphQL
-    url: graphql/best-buy-graphql.md
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
   - type: Documentation
@@ -136,15 +140,16 @@ apis:
   name: Best Buy Stores API
   description: Best Buy store location and information queries
   humanURL: https://bestbuyapis.github.io/api-documentation/#products-api
+  baseURL: https://api.bestbuy.com/v1
   tags:
   - Stores
   properties:
   - type: OpenAPI
     url: openapi/best-buy-stores-api-openapi.yml
+  - type: Overlay
+    url: overlays/best-buy-stores-overlay.yaml
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#products-api
-  - type: GraphQL
-    url: graphql/best-buy-graphql.md
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#stores-api
   - type: Documentation
@@ -226,7 +231,56 @@ common:
   url: rules/best-buy-spectral-rules.yml
 - type: Vocabulary
   url: vocabulary/best-buy-vocabulary.yaml
+- type: Packages
+  url: packages/best-buy-packages.yml
+- type: SDKs
+  url: packages/best-buy-packages.yml
+- type: CLI
+  url: cli/best-buy-cli.yml
+- type: LLMsTxt
+  url: llms/best-buy-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Conventions
+  url: conventions/best-buy-conventions.yml
+- type: DataModel
+  url: data-model/best-buy-data-model.yml
+- type: ErrorCatalog
+  url: errors/best-buy-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/best-buy-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/best-buy-lifecycle.yml
+- type: ChangeLog
+  url: changelog/best-buy-changelog.yml
+- type: Conformance
+  url: conformance/best-buy-conformance.yml
+- type: VulnerabilityDisclosure
+  url: security/best-buy-vulnerability-disclosure.yml
+- type: Security
+  url: security/best-buy-vulnerability-disclosure.yml
+- type: RateLimits
+  url: rate-limits/best-buy-rate-limits.yml
+- type: Plans
+  url: plans/best-buy-plans-pricing.yml
+- type: MCP
+  url: mcp/best-buy-mcp.yml
+- type: WellKnownProbe
+  url: well-known/best-buy-well-known.yml
+- type: APIReference
+  url: https://bestbuyapis.github.io/api-documentation/#products-api
+- type: Support
+  url: https://developer.bestbuy.com/contact-us
+- type: TermsOfService
+  url: https://developer.bestbuy.com/legal
+- type: Console
+  url: https://bestbuyapis.github.io/bby-query-builder/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-enrichment:
+  date: '2026-08-27'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1
