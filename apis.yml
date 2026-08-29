@@ -27,6 +27,8 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/best-buy.png
 url: https://raw.githubusercontent.com/api-evangelist/best-buy/refs/heads/main/apis.yml
+x-api-posture: partner-gated
+x-api-posture-basis: observed
 name: Best Buy
 tags:
 - Fortune 100
