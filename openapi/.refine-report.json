@@ -13,6 +13,11 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "best-buy-products-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "best-buy-recommendations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "best-buy-stores-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
