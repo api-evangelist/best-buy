@@ -1,0 +1,80 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Best Buy Recommendations API
+  version: 1.0.0
+extends: ../openapi/best-buy-recommendations-api-openapi.yml
+x-generated: '2026-08-27'
+x-method: derived
+x-source: >-
+  https://developer.bestbuy.com/legal, https://bestbuyapis.github.io/api-documentation/,
+  and observed responses from api.bestbuy.com probed 2026-08-27. Captures enhancements as an
+  OpenAPI Overlay so the harvested contract is never mutated.
+actions:
+- target: $.info
+  description: Record the published rate ceiling, caching obligation and support surface on the contract itself.
+  update:
+    x-rate-limits:
+      requests_per_second: 5
+      requests_per_day: 50000
+      status_on_exhaustion: 403
+      headers: none
+      source: https://developer.bestbuy.com/legal
+    x-cache-policy:
+      max_client_cache_hours: 72
+      response_link_expiry_days: 7
+      source: https://developer.bestbuy.com/legal
+      note: Contractual, not a Cache-Control directive.
+    x-support:
+      contact: https://developer.bestbuy.com/contact-us
+      issues: https://github.com/BestBuyAPIs/api-documentation/issues
+      terms: https://developer.bestbuy.com/legal
+    x-lifecycle:
+      current_version: v1
+      change_log: https://github.com/BestBuyAPIs/api-release-notes/blob/master/CHANGELOG.md
+      change_log_last_entry: '2017-10-01'
+      status_page: null
+      sla: null
+- target: $.components.securitySchemes.apiKey
+  description: Flag that the API key travels in the query string, and is therefore logged in transit.
+  update:
+    x-credential-exposure: query-string
+    x-credential-note: >-
+      The key is placed in the request URL and is consequently recorded by proxies, CDN access
+      logs and browser history. No scope model, no documented rotation or revocation flow.
+    x-signup: https://developer.bestbuy.com
+- target: $.components.schemas.ErrorResponse
+  description: Record the divergence between the declared error schema and the shape the live API returns.
+  update:
+    x-observed-envelope:
+      errorCode: string
+      errorMessage: string
+    x-observed-example: '{"errorCode":"403", "errorMessage":"We were unable to locate your API Key."}'
+    x-divergence: >-
+      The spec declares {status,error,message} and declares 401 for auth failure; the live API
+      returns 403 with {errorCode,errorMessage}. Clients branching on 401 or on an integer
+      status field will not match. Probed 2026-08-27.
+    x-rfc9457: false
+- target: $.paths.*.get
+  description: Mark every published operation as read-only and safe for autonomous agent execution.
+  update:
+    x-agentic-consequence: read
+    x-idempotent: true
+    x-reversible: na
+- target: $.paths.*.get.responses
+  description: Add the 403 the API actually returns for auth failure and quota exhaustion.
+  update:
+    '403':
+      description: >-
+        Invalid API key OR call limit exceeded (5 req/sec or 50,000 req/day). Best Buy overloads
+        this status across both conditions and sends no Retry-After header.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errorCode:
+                type: string
+                example: '403'
+              errorMessage:
+                type: string
+                example: We were unable to locate your API Key.
