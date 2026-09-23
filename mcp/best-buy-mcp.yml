@@ -1,0 +1,71 @@
+generated: '2026-08-27'
+method: derived
+source: openapi/best-buy-products-api-openapi.yml, openapi/best-buy-stores-api-openapi.yml, openapi/best-buy-recommendations-api-openapi.yml
+status: candidate
+description: >-
+  Best Buy publishes NO first-party MCP server. Searched 2026-08-27: developer.bestbuy.com/mcp
+  404s, api.bestbuy.com/mcp returns the blanket API-key 403, and the only "Best Buy MCP"
+  servers in circulation are third-party wrappers (Composio's bestbuy toolkit, and a family of
+  Apify scraper actors) that Best Buy neither publishes nor endorses. The tool list below is a
+  CANDIDATE derived from the eight operations in this repo's OpenAPI — it is what a Best Buy MCP
+  server would expose, not something that exists.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+third_party_servers_not_endorsed:
+- name: Composio Bestbuy toolkit
+  url: https://composio.dev/toolkits/bestbuy
+  first_party: false
+- name: Apify Best Buy scraper actors (multiple publishers)
+  url: https://apify.com/
+  first_party: false
+  note: Scrapers against bestbuy.com storefront HTML, not clients of the developer API.
+candidate_tools:
+- name: search_products
+  operationId: listProducts
+  rest: GET https://api.bestbuy.com/v1/products
+  description: Query the Best Buy product catalog by keyword, SKU attribute filter, price, or category.
+  consequence: read
+- name: get_product
+  operationId: getProductBySku
+  rest: GET https://api.bestbuy.com/v1/products/{sku}
+  description: Retrieve one product by SKU with pricing, availability, specs, images and review aggregates.
+  consequence: read
+- name: search_stores
+  operationId: listStores
+  rest: GET https://api.bestbuy.com/v1/stores
+  description: Find Best Buy stores by postal code, distance, city, state or service offered.
+  consequence: read
+- name: get_store
+  operationId: getStoreById
+  rest: GET https://api.bestbuy.com/v1/stores/{storeId}
+  description: Retrieve one store by storeId with address, hours, services and coordinates.
+  consequence: read
+- name: get_trending_products
+  operationId: getTrendingProducts
+  rest: GET https://api.bestbuy.com/v1/products/trendingViewed
+  description: Products trending in views, optionally scoped to a category.
+  consequence: read
+- name: get_most_viewed_products
+  operationId: getMostViewedProducts
+  rest: GET https://api.bestbuy.com/v1/products/mostViewed
+  description: Most-viewed products, optionally scoped to a category.
+  consequence: read
+- name: get_also_viewed
+  operationId: getAlsoViewedProducts
+  rest: GET https://api.bestbuy.com/v1/products/{sku}/alsoViewed
+  description: Products also viewed by customers who viewed this SKU.
+  consequence: read
+- name: get_also_bought
+  operationId: getAlsoBoughtProducts
+  rest: GET https://api.bestbuy.com/v1/products/{sku}/alsoBought
+  description: Products also bought by customers who bought this SKU.
+  consequence: read
+notes:
+- All eight candidate tools are read-only; the write surface (Commerce API order creation, modification and cancellation) is not publicly specified and requires a separately-issued CAPI key.
+- Auth would be a query-string apiKey (see authentication/best-buy-authentication.yml), which is an awkward fit for MCP secret handling — a header-based key would be the prerequisite for a credible server.
+- Rate ceiling any server must respect: 5 requests/second and 50,000 requests/day per key (see rate-limits/).

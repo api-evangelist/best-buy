@@ -1,0 +1,114 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/BestBuyAPIs + registry.npmjs.org + repo.packagist.org + rubygems.org
+description: >-
+  First-party Best Buy API client libraries, all published from the BestBuyAPIs GitHub
+  organization. Every one of them is dormant: the newest first-party release on any public
+  registry is the node client at 2.4.1 (2021-02-10), and the PHP, Ruby, CLI, Java, .NET and
+  Groovy clients have had no registry release since 2015-2017. The API itself is still live
+  at api.bestbuy.com/v1, so the SDK layer trails the service by five to eleven years.
+official_count: 4
+packages:
+- language: javascript
+  registry: npm
+  name: bestbuy
+  url: https://www.npmjs.com/package/bestbuy
+  repository: https://github.com/BestBuyAPIs/bestbuy-sdk-js
+  install: npm install bestbuy
+  official: true
+  version: 2.4.1
+  published: '2021-02-10'
+  note: >-
+    High-level Node.js client for the Best Buy developer API. The most recently released
+    first-party SDK; still four-plus years behind the current date.
+- language: php
+  registry: packagist
+  name: bestbuy/bestbuy
+  url: https://packagist.org/packages/bestbuy/bestbuy
+  repository: https://github.com/BestBuyAPIs/bestbuy-sdk-php
+  install: composer require bestbuy/bestbuy
+  official: true
+  version: v1.0.4
+  published: '2017-09-08'
+  note: PHP client for the Best Buy APIs. No release in eight years.
+- language: ruby
+  registry: rubygems
+  name: bestbuy
+  url: https://rubygems.org/gems/bestbuy
+  repository: https://github.com/BestBuyAPIs/bestbuy-sdk-ruby
+  install: gem install bestbuy
+  official: true
+  version: 0.0.0
+  published: '2015-07-12'
+  note: >-
+    Published once at 0.0.0 in 2015 and never versioned past it. Effectively a placeholder
+    release rather than a maintained client.
+- language: javascript
+  registry: npm
+  name: bestbuy-cli
+  url: https://www.npmjs.com/package/bestbuy-cli
+  repository: https://github.com/BestBuyAPIs/bestbuy-cli
+  install: npm install -g bestbuy-cli
+  official: true
+  version: 1.1.1
+  published: '2017-11-21'
+  note: >-
+    Bulk download tool for the Best Buy Catalog API. Also captured in cli/best-buy-cli.yml.
+- language: java
+  registry: null
+  name: bestbuy-sdk-java
+  url: https://github.com/BestBuyAPIs/bestbuy-sdk-java
+  repository: https://github.com/BestBuyAPIs/bestbuy-sdk-java
+  install: null
+  official: true
+  version: null
+  published: null
+  note: >-
+    Source-only. Checked search.maven.org for a bestbuy coordinate on 2026-08-27 and found
+    no first-party artifact — only an unrelated third-party nemesis-widget-bestbuy. Consumers
+    must build from source; last repo push 2017-05-01.
+- language: csharp
+  registry: null
+  name: bestbuy-sdk-dotnet
+  url: https://github.com/BestBuyAPIs/bestbuy-sdk-dotnet
+  repository: https://github.com/BestBuyAPIs/bestbuy-sdk-dotnet
+  install: null
+  official: true
+  version: null
+  published: null
+  note: >-
+    Source-only. NuGet search for "bestbuy" on 2026-08-27 returned only the third-party
+    LinqToBBYOpen 0.9.5; no first-party package. Last repo push 2015-12-08.
+- language: groovy
+  registry: null
+  name: bestbuy-sdk-groovy
+  url: https://github.com/BestBuyAPIs/bestbuy-sdk-groovy
+  repository: https://github.com/BestBuyAPIs/bestbuy-sdk-groovy
+  install: null
+  official: true
+  version: null
+  published: null
+  note: Source-only, no registry artifact found. Last repo push 2015-12-08.
+third_party_noted:
+- language: python
+  registry: pypi
+  name: bestbuyapi
+  url: https://pypi.org/project/bestbuyapi/
+  official: false
+  version: 2.2.0
+  published: '2026-08-22'
+  note: >-
+    Community Python wrapper, NOT published by Best Buy. Notable because it is the only
+    actively-maintained client for this API on any registry — released five days before this
+    probe, while every first-party SDK is dormant.
+- language: python
+  registry: pypi
+  name: bestbuy
+  url: https://pypi.org/project/bestbuy/
+  official: false
+  version: 1.0.1
+  published: '2020-02-19'
+  note: Community client (github.com/nwithan8/BestBuy), not first-party.
+gaps:
+- Best Buy publishes no first-party Python client despite Python being the dominant language for retail data work.
+- Java, .NET and Groovy clients exist as source only, with no artifact on Maven Central or NuGet.

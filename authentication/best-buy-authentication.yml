@@ -1,18 +1,52 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/best-buy-products-api.yaml, openapi/best-buy-recommendations-api.yaml, openapi/best-buy-stores-api.yaml
+generated: '2026-08-27'
+method: searched
+source: https://bestbuyapis.github.io/api-documentation/#user-guide + https://developer.bestbuy.com/ + openapi/
+description: >-
+  Best Buy uses a single unscoped API key passed as a QUERY-STRING parameter (apiKey=) on
+  every request. There is no OAuth, no OIDC, no bearer token, no signing, no key rotation
+  endpoint and no scope model — one key grants everything the tier allows. The Commerce API
+  uses a second, separately-issued key ("CAPI key") obtained by contacting Best Buy directly.
 summary:
   types:
   - apiKey
   api_key_in:
   - query
+  oauth2: false
+  openid_connect: false
+  mtls: false
+  scoped: false
 schemes:
 - name: apiKey
   type: apiKey
   in: query
   parameter: apiKey
-  description: API key obtained by registering at developer.bestbuy.com.
+  description: API key obtained by registering at developer.bestbuy.com and activating via email.
+  example_form: https://api.bestbuy.com/v1/products?apiKey=YourAPIKey&format=json
   sources:
-  - openapi/best-buy-products-api.yaml
-  - openapi/best-buy-recommendations-api.yaml
-  - openapi/best-buy-stores-api.yaml
+  - openapi/best-buy-products-api-openapi.yml
+  - openapi/best-buy-recommendations-api-openapi.yml
+  - openapi/best-buy-stores-api-openapi.yml
+  - https://bestbuyapis.github.io/api-documentation/#user-guide
+- name: capiKey
+  type: apiKey
+  in: query
+  parameter: apiKey
+  description: >-
+    Separate key for the Commerce API, not issued by self-serve registration. Requested via
+    developer.bestbuy.com/contact-us?topic=commerce-api; the Commerce API's full documentation
+    is supplied only after the key is granted, so its exact auth mechanics are not public.
+  gated: true
+  sources:
+  - https://bestbuyapis.github.io/api-documentation/#commerce-api
+docs: https://bestbuyapis.github.io/api-documentation/#user-guide
+signup: https://developer.bestbuy.com
+failure_modes:
+- status: 403
+  meaning: >-
+    Overloaded. Returned both for a missing/invalid API key AND for an exceeded call limit —
+    the two are not distinguishable from the response. Anonymous requests to any path on
+    api.bestbuy.com return {"errorCode":"403","errorMessage":"We were unable to locate your API Key."}
+agent_notes:
+- A key in the query string is logged by every proxy, CDN and browser history in the path. Agents should treat a Best Buy key as exposed-by-design and scope its blast radius accordingly — though with no scope model there is nothing to scope.
+- No documented rotation, expiry or revocation flow. Key lifecycle is manual, through the portal.
+- The OpenAPI declares the scheme as `apiKey` in `query`, and it is applied globally via a root-level `security:` block on all three specs.

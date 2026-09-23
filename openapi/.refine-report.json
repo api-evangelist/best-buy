@@ -1,9 +1,9 @@
 {
   "provider": "best-buy",
   "sources": [
-    "best-buy-products-api-openapi.yml",
-    "best-buy-recommendations-api-openapi.yml",
-    "best-buy-stores-api-openapi.yml"
+    "_ae-authored/best-buy-products-api.yaml",
+    "_ae-authored/best-buy-recommendations-api.yaml",
+    "_ae-authored/best-buy-stores-api.yaml"
   ],
   "outputs": [
     "best-buy-products-api-openapi.yml",
@@ -14,10 +14,15 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "best-buy-products-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "best-buy-recommendations-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "best-buy-stores-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "best-buy-products-api.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "best-buy-recommendations-api.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "best-buy-stores-api.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "best-buy-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "best-buy-recommendations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "best-buy-stores-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

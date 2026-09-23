@@ -1,0 +1,150 @@
+generated: '2026-08-27'
+method: searched
+source: https://bestbuyapis.github.io/api-documentation/#user-guide + https://developer.bestbuy.com/legal + openapi/
+description: >-
+  Cross-cutting runtime semantics for the Best Buy Open API. The public surface is a read-only,
+  GET-only catalog API with a query-string API key, cursor-and-page hybrid pagination, a
+  `show=` sparse-fieldset parameter and an LHS-operator filter language embedded in the path.
+  There is no idempotency mechanism, no request-id tracing, no rate-limit headers, and no
+  webhooks. The only write surface (Commerce API order creation, modification and cancellation)
+  is sales-gated and its semantics are not published.
+auth:
+  style: api-key
+  transport: query string (`apiKey=`)
+  scoped: false
+  rotation_documented: false
+  see: authentication/best-buy-authentication.yml
+idempotency:
+  supported: false
+  na_reason: >-
+    Not applicable to the public surface — all eight published operations are GET, which is
+    idempotent by HTTP semantics. No Idempotency-Key header, request-fingerprint or replay
+    window is documented anywhere, and the Commerce API's order-creation semantics are not
+    public, so nothing can be asserted about the one place idempotency would matter.
+  header: null
+  scope: null
+  retention: null
+pagination:
+  style: page-and-cursor
+  params:
+  - name: page
+    description: 1-indexed page number.
+  - name: pageSize
+    description: Results per page. Documentation caps this at 100 for the catalog APIs.
+  - name: cursorMark
+    description: Deep-pagination cursor; pass the value of nextCursorMark from the previous response.
+  response_fields:
+  - from
+  - to
+  - total
+  - currentPage
+  - totalPages
+  - nextCursorMark
+  - queryTime
+  - totalTime
+  - partial
+  note: >-
+    page/pageSize is the documented default; cursorMark/nextCursorMark exists for deep paging
+    past the page-window limit. Agents walking a large result set should use nextCursorMark.
+field_selection:
+  supported: true
+  param: show
+  description: >-
+    Comma-separated allowlist of response attributes, e.g. show=sku,name,salePrice. Also accepts
+    `show=all`. This is the sparse-fieldset mechanism and it materially reduces payload weight,
+    which matters given the 5 req/sec ceiling.
+  expansion: none — no $expand/include mechanism; relationships are pre-embedded (categoryPath, offers, contracts) rather than fetched
+filtering:
+  style: path-embedded expression language
+  description: >-
+    Filters are expressed inside parentheses in the path, e.g.
+    /v1/products(salePrice<100&manufacturer=samsung). Operators include =, !=, <, >, <=, >=,
+    in(...) and searchable-text operators. The docs specifically recommend `in(...)` for batch
+    lookups to avoid per-SKU requests and the resulting QPS errors.
+sorting:
+  param: sort
+  description: sort=<attribute>.asc or sort=<attribute>.desc
+formats:
+  param: format
+  values:
+  - json
+  - xml
+  default: xml
+  note: >-
+    format=json must be requested explicitly on the catalog APIs; the historical default is XML.
+    This is an easy agent trap.
+metadata:
+  supported: false
+  note: No customer-defined metadata fields — this is a read-only catalog, not a resource store.
+tracing:
+  request_id_header: null
+  correlation_id: null
+  note: >-
+    No X-Request-Id, X-Correlation-Id or trace header is documented, and error bodies carry no
+    identifier. A failed call cannot be referenced by id when contacting support.
+versioning:
+  style: url-path
+  current: v1
+  see: lifecycle/best-buy-lifecycle.yml
+errors:
+  envelope: ad-hoc JSON — {status,error,message} in the spec, {errorCode,errorMessage} on the wire
+  rfc9457: false
+  see: errors/best-buy-problem-types.yml
+rate_limit_signaling:
+  headers: none
+  status_on_exhaustion: 403
+  retry_after: not sent
+  see: rate-limits/best-buy-rate-limits.yml
+  note: >-
+    The worst combination available: no headers, and a status code shared with auth failure.
+    An agent must self-meter against 5 req/sec and 50,000 req/day.
+caching:
+  client_cache_ttl_max: 72 hours
+  source: https://developer.bestbuy.com/legal
+  note: >-
+    Contractual, not technical — the Terms forbid caching Content beyond 72 hours. Returned
+    response links expire after seven days. This is a real constraint on any agent that
+    persists Best Buy data.
+dry_run_mode:
+  supported: false
+  na_reason: No write surface is publicly specified, so there is nothing to rehearse.
+reversibility:
+  applicable: partial
+  grade: documented
+  public_surface:
+    status: na
+    reason: >-
+      The eight published operations (listProducts, getProductBySku, listStores, getStoreById,
+      getTrendingProducts, getMostViewedProducts, getAlsoViewedProducts, getAlsoBoughtProducts)
+      are all GET. There is nothing to reverse, so reversibility is `na` rather than absent.
+  write_surface:
+    api: Best Buy Commerce API
+    status: documented
+    reversal_operations:
+    - action: Modify or cancel an order
+      operation_id: null
+      operation_note: >-
+        Listed as a Commerce API capability ("Modify/Cancel an Order") in the public
+        documentation, but no HTTP method, path or operationId is published — full documentation
+        is supplied only after a CAPI key is issued.
+      window: null
+      window_note: >-
+        NO cancellation window is stated in any public Best Buy documentation. Do not assume one.
+        An agent placing an order through the Commerce API cannot determine from published
+        material how long it has to cancel, or whether cancellation is possible after any
+        fulfilment step begins.
+      docs: https://bestbuyapis.github.io/api-documentation/#commerce-api
+    refund: not documented publicly
+    void: not documented publicly
+  grade_basis: >-
+    `documented` (0.4) not `verified` (1.0): a reversal path is named in the provider's own docs,
+    but no window is stated and no operation identifier is published.
+webhooks:
+  supported: false
+  note: No webhook, callback or event surface is published. Consumers poll.
+cross_links:
+  errors: errors/best-buy-problem-types.yml
+  lifecycle: lifecycle/best-buy-lifecycle.yml
+  authentication: authentication/best-buy-authentication.yml
+  rate_limits: rate-limits/best-buy-rate-limits.yml
+  data_model: data-model/best-buy-data-model.yml

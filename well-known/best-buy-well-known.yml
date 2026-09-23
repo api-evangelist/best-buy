@@ -1,0 +1,115 @@
+generated: '2026-08-27'
+method: probed
+source: direct HTTPS probes on 2026-08-27
+description: >-
+  No /.well-known/ document is served on any Best Buy host. The API host api.bestbuy.com
+  answers EVERY path — including every /.well-known/* path — with an identical 98-byte
+  403 JSON body ("We were unable to locate your API Key"), so the discovery surface there is
+  not absent so much as unmeasurable behind a blanket API-key gate. developer.bestbuy.com
+  and bestbuyapis.github.io return real 404 HTML for every path. www.bestbuy.com refused
+  every connection from this crawler (curl exit, HTTP 000) and could not be measured at all.
+hit_count: 0
+hosts:
+- host: https://api.bestbuy.com
+  note: >-
+    Blanket API-key gate. All paths return the same 403 JSON regardless of path, so a 403 here
+    is not evidence the document is absent — it is evidence the host answers nothing anonymously.
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 403
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+  - path: /.well-known/api-catalog
+    status: 403
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 403
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 403
+    file: null
+  - path: /.well-known/agent.json
+    status: 403
+    file: null
+- host: https://developer.bestbuy.com
+  note: Real 404 HTML page (5,018 bytes, <title>404 - Page not found</title>) for every path — not a catch-all 200.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: https://bestbuyapis.github.io
+  note: GitHub Pages 404 for every path.
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /api-documentation/.well-known/security.txt
+    status: 404
+    file: null
+- host: https://corporate.bestbuy.com
+  note: WordPress 404 template (51KB HTML) for every path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+- host: https://www.bestbuy.com
+  note: >-
+    UNMEASURABLE. Every request from this crawler — including / and /robots.txt — terminated
+    with no HTTP response (curl status 000, connection refused/reset). This is a bot policy on
+    the retail host, not evidence about the documents.
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 0
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+    file: null
+  - path: /.well-known/api-catalog
+    status: 0
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 0
+    file: null
+  - path: /.well-known/agent.json
+    status: 0
+    file: null
+pointer_note: >-
+  No WellKnown or SecurityTxt pointer is emitted in apis.yml. Nothing returned a 200 carrying
+  a real document, so a pointer here would assert a surface Best Buy does not serve. Note that
+  Best Buy DOES run a vulnerability disclosure program (hackerone.com/bestbuy) — it is simply
+  not advertised via RFC 9116; see security/best-buy-vulnerability-disclosure.yml.

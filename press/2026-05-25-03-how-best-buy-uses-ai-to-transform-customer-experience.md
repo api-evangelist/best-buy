@@ -1,7 +1,9 @@
 ---
 title: How Best Buy Uses AI To Transform Customer Experience
 url: https://www.forbes.com/sites/maribellopez/2025/06/17/how-best-buy-uses-ai-to-transform-customer-experience/
-date: '2026-05-25'
+published: '2025-06-17'
+date_basis: url-derived
+harvested: '2026-05-25'
 query: '"Best Buy" press release artificial intelligence'
 position: 3
 source: serpapi-google

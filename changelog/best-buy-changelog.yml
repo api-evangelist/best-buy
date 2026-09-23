@@ -1,0 +1,76 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/BestBuyAPIs/api-release-notes/blob/master/CHANGELOG.md
+description: >-
+  Best Buy maintains its API change log as a keep-a-changelog-formatted markdown file in the
+  public BestBuyAPIs/api-release-notes repository, one file per release under notes/, compiled
+  into CHANGELOG.md. The process is well-structured and completely dormant — the newest entry
+  is R17.4, dated 2017-10-01. developer.bestbuy.com/changelog, which the repo README still
+  advertises, now returns 404.
+scheme: keep-a-changelog, one markdown file per release, compiled to CHANGELOG.md
+current_version: R17.4
+current_version_date: '2017-10-01'
+staleness_note: >-
+  8 years 10 months since the last published entry as of 2026-08-27. Treat any assumption of
+  ongoing change communication as unsupported.
+urls:
+  changelog: https://github.com/BestBuyAPIs/api-release-notes/blob/master/CHANGELOG.md
+  raw: https://raw.githubusercontent.com/BestBuyAPIs/api-release-notes/master/CHANGELOG.md
+  advertised_but_dead:
+  - url: https://developer.bestbuy.com/changelog
+    status: 404
+entries:
+- version: R17.4
+  date: '2017-10-01'
+  breaking: true
+  additions:
+  - productVariations attribute set (variations.name, variations.value by productVariations.sku) exposing colour, size and brand-collection relationships
+  - discs[].tracks — name and sequence for songs on a music SKU
+  - contracts[] (type, prices, priceNote) — monthly pricing for activated mobile devices
+  changes:
+  - Deprecated relatedProducts, productFamilies and frequentlyPurchasedWith, with deletion announced for early 2018 and explicitly called "a change in our contract"
+  - Deprecated onlineAvailabilityText/Html and inStoreAvailabilityText/Html as likely to go stale
+  - 10-digit SKUs (digital products) being replaced by 7-digit SKUs — breaks any client with SKU-length logic
+- version: R17.3
+  date: '2017-06-06'
+  breaking: false
+  additions:
+  - Near-real-time per-SKU in-store availability, queryable by storeId or postalCode
+- version: R17.2
+  date: '2017-04-03'
+  breaking: true
+  changes:
+  - beta/products/<sku>/similar retired; the endpoint now 404s because its upstream data source was deprecated
+- version: R17.1
+  date: '2017-03-24'
+  breaking: false
+  changes:
+  - Catalog API image links moved to SSL (https://img.bbystatic.com/...)
+- version: R16.5
+  date: '2016-12-14'
+  breaking: false
+  changes:
+  - Unrecognised query parameters no longer return 400
+  - Product searches now include available offers and free items
+  - Nested-attribute queries (mobile carrier terms, plan features) no longer 500
+  - Special characters such as - and * in search strings no longer 500
+  - More products returned when querying friendsAndFamilyPickup
+- version: R16.4
+  date: '2016-06-30'
+  breaking: false
+  additions:
+  - offers.type gift_with_purchase exposed alongside digital_insert
+  changes:
+  - Unknown query parameters ignored rather than rejected (robustness principle)
+  - URL fields consolidated from 8 toward 2; links moved from www.bestbuy.com/... to api.bestbuy.com/click..., enabling add-to-cart and automatic affiliate-code attachment
+- version: R16.3
+  date: '2016-05-30'
+  breaking: false
+  changes:
+  - Shipping cost calculated from shippingLevelsOfService.serviceLevelId rather than serviceLevelName
+  - Presale dummy releaseDate of 12/31/YYYY now returns null
+- version: R16.2
+  date: '2016-03-01'
+  breaking: true
+  changes:
+  - bestBuyItemID attribute deprecated and forced to an empty string across Best Buy systems

@@ -1,0 +1,101 @@
+generated: '2026-08-27'
+method: derived
+source: openapi/ + https://bestbuyapis.github.io/api-documentation/ + https://developer.bestbuy.com/legal + https://hackerone.com/bestbuy
+description: >-
+  Standards and cross-cutting conformance assertions for the Best Buy Open API, derived from the
+  contract and confirmed against the provider's own documentation. The picture is a plain,
+  pre-standards REST API: OpenAPI 3.0.3 describes it, and essentially nothing else is claimed
+  or observable. No OAuth, no OIDC, no RFC 9457, no RFC 9116, no RFC 8594, no JSON:API, no
+  OData, and no retail-domain interchange standard.
+conformance:
+- id: openapi
+  conforms: true
+  evidence: >-
+    openapi/best-buy-products-api-openapi.yml, best-buy-stores-api-openapi.yml and
+    best-buy-recommendations-api-openapi.yml are OpenAPI 3.0.3 with servers[], global security,
+    tags, unique operationIds, and 2xx/4xx responses on every operation.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in any spec; no /.well-known/oauth-authorization-server (404 on developer.bestbuy.com). Auth is a single unscoped query-string API key.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on developer.bestbuy.com and the blanket 403 on api.bestbuy.com.
+- id: rfc9457
+  conforms: false
+  evidence: Errors are ad-hoc JSON — {status,error,message} in the spec, {errorCode,errorMessage} on the wire. No application/problem+json media type appears in any response.
+- id: rfc9116
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 or the blanket 403 on every Best Buy host probed 2026-08-27. Note this is a publication gap, not a program gap — Best Buy runs a real VDP at hackerone.com/bestbuy.
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header support documented. Deprecations were announced in a markdown change log, last used 2017-10-01.
+- id: rfc6570
+  conforms: false
+  evidence: Filters use a Best Buy-specific parenthesised path expression language, e.g. /v1/products(salePrice<100&manufacturer=samsung) — not URI Templates.
+- id: pagination
+  conforms: true
+  evidence: page/pageSize with from/to/total/currentPage/totalPages in the response envelope, plus cursorMark/nextCursorMark for deep paging. Documented and present in components.schemas.ProductListResponse and StoreListResponse.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header or replay mechanism. Public surface is GET-only, so the gap only bites on the gated Commerce API.
+- id: json-api
+  conforms: false
+  evidence: Response envelopes are bespoke; no data/attributes/relationships structure, no application/vnd.api+json.
+- id: odata
+  conforms: false
+  evidence: No $metadata endpoint; no $filter/$select/$expand. Best Buy uses show= and its own filter grammar.
+- id: scim
+  conforms: false
+  evidence: No identity provisioning surface exists in this API.
+- id: hal
+  conforms: false
+  evidence: No _links or _embedded; relationships are pre-embedded values (categoryPath, offers) rather than hypermedia.
+- id: cors
+  conforms: unknown
+  evidence: Not documented, and could not be observed anonymously — api.bestbuy.com returns the 403 gate to keyless requests, preflight included.
+domain_standards:
+  market: retail / consumer-electronics e-commerce
+  declared: false
+  probed_for:
+  - id: gs1-gtin
+    found: false
+    evidence: >-
+      No GTIN/UPC/EAN field appears in components.schemas.Product across any spec. Products are
+      keyed on the Best Buy proprietary `sku` (and historically a `bestBuyItemID`, deprecated in
+      R16.2). A buyer already speaking GS1 must build a bespoke SKU-to-GTIN mapping.
+  - id: schema-org-product
+    found: false
+    evidence: No JSON-LD, no @context, no schema.org Product/Offer vocabulary in any response schema.
+  - id: openrtb
+    found: false
+    evidence: Not an ad-tech surface; no bid endpoint.
+  - id: edifact-x12
+    found: false
+    evidence: No EDI/B2B interchange surface is published. Best Buy's supplier-facing EDI, if any, is not part of the developer program.
+  - id: ecl-omnichannel
+    found: false
+    evidence: No adoption of an industry order/inventory interchange schema; Commerce API shapes are proprietary and unpublished.
+  note: >-
+    REWARD-ONLY and honestly empty. Consumer-electronics retail does have a live identifier
+    standard (GS1 GTIN) that this contract could declare and does not; nothing is invented here
+    to fill the slot.
+compliance_programs:
+- name: Best Buy Vulnerability Disclosure Program
+  type: vulnerability-disclosure
+  operator: HackerOne
+  url: https://hackerone.com/bestbuy
+  verified: true
+  status: 200
+  evidence: Probed 2026-08-27, HTTP 200. Public VDP with a stated two-business-day acknowledgement commitment and a safe-harbour clause ("Best Buy will not initiate legal action" for activity conducted in compliance with the policy).
+- name: Responsible Disclosure Policy
+  type: policy-page
+  url: https://www.bestbuy.com/site/help-topics/responsible-disclosure/pcmcat1584549036018.c
+  verified: false
+  status: 0
+  evidence: Referenced by the HackerOne program. The page could not be fetched from this crawler — www.bestbuy.com returned no HTTP response to any request on 2026-08-27.
+certifications_published: []
+certifications_note: >-
+  No trust center, SOC 2, ISO 27001, PCI DSS or FedRAMP attestation is published on any Best Buy
+  developer or corporate surface reachable by this pass. Best Buy is a card-accepting retailer
+  and is therefore PCI-DSS-obligated, but no attestation is publicly linked, so nothing is
+  asserted here.

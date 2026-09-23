@@ -1,0 +1,82 @@
+generated: '2026-08-27'
+method: searched
+source: https://bestbuyapis.github.io/api-documentation/#user-guide + openapi/best-buy-products-api-openapi.yml + observed responses from api.bestbuy.com
+description: >-
+  Best Buy does NOT use RFC 9457 problem+json. Errors come back as a small ad-hoc JSON object.
+  Two envelope shapes are in circulation: the documentation/spec shape {status, error, message}
+  and the shape actually observed on the wire from api.bestbuy.com,
+  {"errorCode":"403","errorMessage":"We were unable to locate your API Key."} — note errorCode
+  is a STRING, not an integer. There is no error-type URI, no machine-readable error code
+  registry beyond HTTP status, and no correlation/request id in the error body.
+format: ad-hoc-json
+rfc9457: false
+envelopes:
+- name: documented
+  media_type: application/json
+  fields:
+  - name: status
+    type: integer
+  - name: error
+    type: string
+  - name: message
+    type: string
+  source: openapi/ components.schemas.ErrorResponse (all three specs)
+- name: observed
+  media_type: application/json
+  fields:
+  - name: errorCode
+    type: string
+    note: HTTP status rendered as a string, e.g. "403"
+  - name: errorMessage
+    type: string
+  source: probed 2026-08-27 — GET https://api.bestbuy.com/v1/products with no key
+  verbatim_example: '{"errorCode":"403", "errorMessage":"We were unable to locate your API Key."}'
+problem_types:
+- status: 400
+  title: Bad Request
+  meaning: Missing or malformed request.
+  remediation: Check required query parameters and operator syntax. Since R16.4 (2016) unknown query parameters are ignored rather than rejected, so a 400 points at a malformed value or filter expression, not an unrecognised parameter name.
+  source: docs + openapi
+- status: 401
+  title: Unauthorized
+  meaning: Declared in the OpenAPI responses for every operation as the auth failure.
+  remediation: Supply a valid apiKey query parameter.
+  source: openapi
+  note: >-
+    DIVERGENCE. The spec declares 401 for auth failure, but the live API returns 403 for a
+    missing or invalid key. An agent branching on 401 will not see it. The 403 path is
+    authoritative.
+- status: 403
+  title: Forbidden
+  meaning: Invalid API key OR exceeded call limit — the two are not distinguishable from the response.
+  remediation: Verify the key; if the key is known good, you have hit either the 5 req/sec or the 50,000 req/day ceiling. Back off and retry; there is no Retry-After header to tell you how long.
+  source: docs + probed
+  overloaded: true
+- status: 404
+  title: Not Found
+  meaning: Item not found — an unknown SKU, storeId or a retired endpoint.
+  remediation: Confirm the identifier. Note beta/products/<sku>/similar was retired in R17.2 (2017) and permanently 404s.
+  source: docs + openapi
+- status: 405
+  title: Method Not Allowed
+  meaning: HTTP method not supported on the resource. The public catalog surface is GET-only.
+  remediation: Use GET.
+  source: docs
+- status: 500
+  title: Internal Server Error
+  meaning: Server error on the Best Buy side.
+  remediation: Retry with backoff. Historically 500s were triggered by nested-attribute queries and special characters in search strings; both were fixed in R16.5 (2016).
+  source: docs + openapi
+- status: 501
+  title: Not Implemented
+  meaning: Server error on the Best Buy side.
+  remediation: Retry with backoff; report via github.com/BestBuyAPIs/api-documentation/issues if persistent.
+  source: docs
+- status: 503
+  title: Service Unavailable
+  meaning: Server error on the Best Buy side.
+  remediation: Retry with backoff. No status page exists to confirm an incident.
+  source: docs
+agent_notes:
+- There is no request-id or trace header in error responses, so a failed call cannot be quoted back to support by identifier.
+- Because 403 is overloaded across auth failure and quota exhaustion, an agent cannot distinguish "my key is wrong" from "I am going too fast" without out-of-band knowledge of its own request rate.

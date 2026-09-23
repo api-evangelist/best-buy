@@ -1,0 +1,28 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/BestBuyAPIs/bestbuy-cli + https://www.npmjs.com/package/bestbuy-cli
+description: >-
+  Best Buy ships one first-party CLI, bestbuy-cli, published from the BestBuyAPIs GitHub
+  organization. It is a bulk-extraction tool rather than a general API console: it downloads
+  data from the Best Buy Catalog API in bulk from the command line. Last released 1.1.1 on
+  2017-11-21 and last pushed to the repo 2021-04-22 — functional in intent but unmaintained.
+name: bestbuy-cli
+official: true
+repository: https://github.com/BestBuyAPIs/bestbuy-cli
+registry: npm
+package: bestbuy-cli
+version: 1.1.1
+published: '2017-11-21'
+install:
+- method: npm
+  command: npm install -g bestbuy-cli
+surface:
+- group: catalog
+  purpose: Bulk download of Best Buy Catalog API data (products, stores, categories) to local files
+  auth: Best Buy developer API key (query-string apiKey), same credential as the REST API
+key_flows:
+- name: Bulk catalog extract
+  description: Pull the product catalog in bulk rather than paging the REST API by hand, which is the practical way to work inside the 5 req/sec ceiling.
+gaps:
+- No first-party interactive API console or REPL; the closest thing is the browser-based Query Builder at https://bestbuyapis.github.io/bby-query-builder/
+- No shell completion, no config profile management, no output-format flags documented publicly

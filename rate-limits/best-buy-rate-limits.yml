@@ -4,25 +4,72 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Best Buy
 providerId: best-buy
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-08-27'
+method: searched
+source: https://developer.bestbuy.com/legal
+modified: '2026-08-27'
 reconciled: true
 tags:
-  - Rate Limiting
-  - Retail
-  - Enterprise
-description: Best Buy API rate limits are negotiated per contract; no public defaults published.
+- Rate Limiting
+- Retail
+- Quota
+description: >-
+  Best Buy publishes hard numeric API limits in its Terms and Conditions at
+  developer.bestbuy.com/legal: 50,000 calls per day and 5 calls per second, applying to the
+  Products, Reviews, Stores, Categories, Recommendations and Buying Options endpoints.
+  Exceeding either limit returns HTTP 403 (not 429) and triggers an email notification to the
+  key holder. The API returns NO rate-limit response headers, so an agent has no runtime signal
+  and must count its own requests — the 403 it receives on exhaustion is indistinguishable in
+  shape from the 403 returned for an invalid API key.
 sources:
-  - https://developer.bestbuy.com/
+- https://developer.bestbuy.com/legal
+- https://bestbuyapis.github.io/api-documentation/#user-guide
+limit_count: 2
 headers:
-  retryAfter: Retry-After
+  rateLimitLimit: null
+  rateLimitRemaining: null
+  rateLimitReset: null
+  retryAfter: null
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is documented, and none could be
+    observed anonymously — api.bestbuy.com returns the same 403 to every keyless request.
 responseCodes:
-  throttled: 429
+  throttled: 403
+  note: >-
+    Best Buy overloads 403 for both "invalid API key" and "exceeded call limit". The
+    documentation's own status table lists 403 as "Invalid API key or exceeded call limit".
 limits:
-  - name: Per-contract
-    scope: account
-    metric: varies
-    limit: negotiated
-    notes: Contact provider sales for quota details.
+- name: Daily call quota
+  scope: per-key
+  metric: requests
+  window: day
+  limit: 50000
+  burst: null
+  applies_to:
+  - Products API
+  - Reviews
+  - Stores API
+  - Categories API
+  - Recommendations API
+  - Buying Options (Open Box) API
+  on_exhaustion: HTTP 403 plus an email notification to the registered key holder
+  source: https://developer.bestbuy.com/legal
+- name: Per-second call rate
+  scope: per-key
+  metric: requests
+  window: second
+  limit: 5
+  burst: null
+  applies_to:
+  - Products API
+  - Reviews
+  - Stores API
+  - Categories API
+  - Recommendations API
+  - Buying Options (Open Box) API
+  on_exhaustion: HTTP 403 ("Query Per Second" / QPS error)
+  source: https://developer.bestbuy.com/legal
+guidance:
+- The documentation recommends the `in(...)` operator for batching lookups specifically to stay under the per-second QPS ceiling rather than issuing one request per SKU.
+- The Buying Options API supports batch queries of up to 100 SKUs in one call, which is the intended way to stay inside 5 rps.
+- Terms also cap caching of returned Content at 72 hours, which bounds how far a consumer can amortise the quota.

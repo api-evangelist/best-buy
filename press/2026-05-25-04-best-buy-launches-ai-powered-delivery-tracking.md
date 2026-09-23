@@ -1,7 +1,9 @@
 ---
 title: Best Buy launches AI-powered delivery tracking
 url: https://www.retaildive.com/news/best-buy-launches-artificial-intelligence-delivery-tracking/724541/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Best Buy" press release artificial intelligence'
 position: 4
 source: serpapi-google

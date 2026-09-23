@@ -1,0 +1,72 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/BestBuyAPIs/api-release-notes + https://developer.bestbuy.com/legal + https://bestbuyapis.github.io/api-documentation/
+description: >-
+  Best Buy versions its API in the URL path (/v1) and once ran a disciplined, keep-a-changelog
+  release process with named releases (R11.1 through R17.4) and explicit multi-month deprecation
+  notices. That process stopped: the last entry in the public change log is R17.4, dated
+  2017-10-01, nearly nine years before this pass. There is no status page, no SLA, no Sunset or
+  Deprecation header support, and the Terms explicitly disclaim any uptime warranty and reserve
+  the right to terminate the service "with or without notice to you."
+versioning:
+  scheme: url-path
+  current_version: v1
+  example: https://api.bestbuy.com/v1/products
+  next_version_signalled: v2
+  next_version_note: >-
+    R17.4 documentation notes "v2 of the Best Buy API will move these parameters out of the path
+    and into the query string." No v2 has shipped and no date was ever published.
+  release_naming: R<year>.<sequence> — e.g. R17.4 = the fourth release of 2017
+deprecation:
+  policy_published: true
+  policy_url: https://github.com/BestBuyAPIs/api-release-notes/blob/master/CHANGELOG.md
+  headers:
+    sunset: false
+    deprecation: false
+    link_successor: false
+  note: >-
+    Deprecation was communicated in the change log with a stated removal window, not via RFC 8594
+    headers. The strongest example is R17.4 (2017-10-01): "We are deprecating three attributes:
+    relatedProducts, productFamilies, and frequentlyPurchasedWith ... We will be deleting these
+    attributes from the response document in early 2018: this is a change in our contract."
+    That practice has not been exercised since 2017.
+  documented_deprecations:
+  - item: relatedProducts, productFamilies, frequentlyPurchasedWith attributes
+    announced: '2017-10-01'
+    removal_window: early 2018
+    release: R17.4
+  - item: onlineAvailabilityText, onlineAvailabilityTextHtml, inStoreAvailabilityText, inStoreAvailabilityTextHtml
+    announced: '2017-10-01'
+    removal_window: not stated — flagged as likely to become stale
+    release: R17.4
+  - item: beta/products/<sku>/similar endpoint (now 404s)
+    announced: '2017-04-03'
+    removal_window: immediate
+    release: R17.2
+  - item: bestBuyItemID attribute
+    announced: '2016-03-01'
+    removal_window: forced to empty string
+    release: R16.2
+  openapi_deprecated_operations: []
+status_page:
+  published: false
+  probed:
+  - url: https://status.bestbuy.com
+    status: 0
+    note: no HTTP response from this crawler
+  - url: https://developer.bestbuy.com/status
+    status: 404
+sla:
+  published: false
+  note: >-
+    Terms and Conditions state Best Buy makes no warranty that "THE SERVICE WILL BE
+    UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE" and reserve termination of the Terms, your
+    participation, or the Service at any time with or without notice.
+  source: https://developer.bestbuy.com/legal
+support:
+  channel: https://developer.bestbuy.com/contact-us
+  issue_tracker: https://github.com/BestBuyAPIs/api-documentation/issues
+maturity_signals:
+- The API is live and serving (api.bestbuy.com/v1 returns a structured 403 to keyless requests, i.e. the gate is running).
+- The change log, the release-notes repo, and every first-party SDK have all been dormant since 2017-2021.
+- Documentation source (BestBuyAPIs/api-documentation) last pushed 2022-07-22 and is still maintained more recently than the SDKs.

@@ -4,39 +4,90 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Best Buy
 providerId: best-buy
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-08-27'
+method: searched
+source: https://developer.bestbuy.com/ + https://developer.bestbuy.com/legal
+modified: '2026-08-27'
 reconciled: true
 tags:
-  - Retail
-  - Enterprise
-  - B2B
-description: Best Buy does not publish public API pricing. Access is via partner/B2B contracts negotiated
-  through the provider's enterprise sales team. Best Buy APIs (Products, Stores) are accessible via developer
-  key; commercial use requires partner agreement.
+- Retail
+- Free Tier
+- Partner
+description: >-
+  Best Buy publishes no priced API plans and no pricing page. There are two access tiers, and
+  neither carries a monetary price. The self-serve developer key is free — register at
+  developer.bestbuy.com, activate by email, and you get the catalog APIs at 50,000 calls/day
+  and 5 calls/second. The Commerce API is a separate, sales-gated tier: it needs a distinct
+  "CAPI key" obtained by contacting Best Buy, and its full technical documentation is only
+  supplied after that key is issued. Revenue on the free tier is affiliate-mediated (Impact
+  partner ID attached to product links) rather than metered, which is why no price list exists.
 sources:
-  - https://developer.bestbuy.com/
+- https://developer.bestbuy.com/
+- https://developer.bestbuy.com/legal
+- https://bestbuyapis.github.io/api-documentation/#commerce-api
+plan_count: 2
 plans:
-  - id: best-buy-partner
-    name: Partner / B2B Contract
-    type: enterprise
-    description: Custom pricing through enterprise sales / partner program.
-    entries:
-      - label: Annual contract (custom)
-        name: annual
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Negotiated contracts
-      - name: Volume discounts
-      - name: Service-level agreements
-      - name: Dedicated account team
-      - name: 'Partner program: https://developer.bestbuy.com/'
+- id: best-buy-developer
+  name: Developer Key (free)
+  type: free
+  price: 0
+  currency: USD
+  billing_period: none
+  description: >-
+    Self-serve, no-cost API key covering the Products, Categories, Stores, Recommendations,
+    Reviews and Buying Options (Open Box) APIs. Registration and email activation only; no
+    credit card, no contract.
+  onboarding: self-serve
+  quota:
+    requests_per_day: 50000
+    requests_per_second: 5
+  overage: none — requests beyond the quota return HTTP 403 and an email notice; there is no paid overage
+  limits:
+  - Content may be cached no longer than 72 hours
+  - Response links expire after seven days
+  - Attribution to Best Buy and display of the Best Buy logo required
+  - May not be used on behalf of or for the benefit of a third party such as another retailer
+  - Best Buy may terminate access at any time, with or without notice
+  entries:
+  - label: Free developer key
+    name: developer
+    type: subscription
+    metric: request
+    limit: 50000
+    timeFrame: day
+    geo: us
+    unit: 1
+    price: 0
+    userMultiplied: false
+- id: best-buy-commerce-partner
+  name: Commerce API (CAPI) Partner
+  type: enterprise
+  price: custom
+  currency: USD
+  billing_period: negotiated
+  description: >-
+    Sales-gated tier for authorized partners: product availability and delivery-date lookups,
+    shipping cost estimation, order creation, order retrieval, and order modification/
+    cancellation across store pickup, ship-to-home and home delivery. Requires a separate CAPI
+    key requested through developer.bestbuy.com/contact-us?topic=commerce-api; full endpoint
+    documentation is released only after the key is granted.
+  onboarding: sales-gate
+  quota: null
+  overage: null
+  limits:
+  - Technical documentation not published publicly
+  - Partner agreement required for commercial use
+  entries:
+  - label: Partner agreement (custom)
+    name: partner
+    type: subscription
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: us
+    unit: 1
+    price: custom
+    userMultiplied: false
+notes:
+- No pricing page exists at developer.bestbuy.com; /pricing and /plans are not published and the portal navigation carries only Our APIs, Documentation, Contact Us and Login.
+- Corrects the 2026-05-04 bulk-sweep record on this file, which described Best Buy as enterprise-contract-only and omitted the free self-serve developer key entirely.

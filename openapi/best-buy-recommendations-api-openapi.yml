@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Best Buy Products Recommendations API
-  description: Access over one million current and historical Best Buy products with real-time pricing, availability, specifications, images, customer reviews, and categorization data. Supports detailed queries by SKU, keyword search, and filtering across all product attributes.
+  title: Best Buy Recommendations API
+  description: Leverage customer behavior data to surface relevant products through trending products, most viewed, also viewed, also bought, and viewed-ultimately-bought recommendation types. Supports queries by category ID or specific SKU.
   version: 1.0.0
   contact:
     url: https://developer.bestbuy.com
@@ -289,6 +289,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RecommendationsResponse:
+      title: RecommendationsResponse
+      type: object
+      description: Response containing recommended product list.
+      properties:
+        metadata:
+          type: object
+          description: Metadata about the result set.
+          properties:
+            resultSet:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  description: Number of results returned.
+                  example: 10
+        results:
+          type: array
+          description: Array of recommended product objects.
+          items:
+            $ref: '#/components/schemas/RecommendedProduct'
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -365,27 +386,6 @@ components:
           type: integer
           description: Rank position in the recommendation list.
           example: 1
-    RecommendationsResponse:
-      title: RecommendationsResponse
-      type: object
-      description: Response containing recommended product list.
-      properties:
-        metadata:
-          type: object
-          description: Metadata about the result set.
-          properties:
-            resultSet:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  description: Number of results returned.
-                  example: 10
-        results:
-          type: array
-          description: Array of recommended product objects.
-          items:
-            $ref: '#/components/schemas/RecommendedProduct'
   securitySchemes:
     apiKey:
       type: apiKey

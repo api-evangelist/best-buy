@@ -292,6 +292,19 @@ components:
           description: Array of product objects.
           items:
             $ref: '#/components/schemas/Product'
+    CategoryRef:
+      title: CategoryRef
+      type: object
+      description: A reference to a product category in the hierarchy.
+      properties:
+        id:
+          type: string
+          description: Category identifier.
+          example: abcat0500000
+        name:
+          type: string
+          description: Category display name.
+          example: Computers & Tablets
     Product:
       title: Product
       type: object
@@ -419,19 +432,6 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Invalid query parameter provided.
-    CategoryRef:
-      title: CategoryRef
-      type: object
-      description: A reference to a product category in the hierarchy.
-      properties:
-        id:
-          type: string
-          description: Category identifier.
-          example: abcat0500000
-        name:
-          type: string
-          description: Category display name.
-          example: Computers & Tablets
   securitySchemes:
     apiKey:
       type: apiKey

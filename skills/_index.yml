@@ -1,0 +1,43 @@
+generated: '2026-08-27'
+method: generated
+source: openapi/ + conventions/best-buy-conventions.yml + rate-limits/best-buy-rate-limits.yml + data-model/best-buy-data-model.yml
+description: >-
+  Packaged Agent Skills for the Best Buy Open API, generated from the OpenAPI documents in this
+  repo. Every operationId referenced is verified present in openapi/. Best Buy publishes no
+  skills, no AGENTS.md and no llms.txt of its own (probed 2026-08-27).
+provider_published: false
+skills:
+- name: best-buy-product-lookup
+  file: best-buy-product-lookup.md
+  api: Best Buy Products API
+  operations:
+  - listProducts
+  - getProductBySku
+  summary: SKU and keyword lookup, batched with in(...), paged with cursorMark, inside the 5 req/sec ceiling.
+- name: best-buy-store-availability
+  file: best-buy-store-availability.md
+  api: Best Buy Stores API
+  operations:
+  - listStores
+  - getStoreById
+  - getProductBySku
+  summary: Proximity store search with area(postalCode,miles), then the application-layer join to in-store availability that the contract does not express.
+- name: best-buy-recommendations
+  file: best-buy-recommendations.md
+  api: Best Buy Recommendations API
+  operations:
+  - getTrendingProducts
+  - getMostViewedProducts
+  - getAlsoViewedProducts
+  - getAlsoBoughtProducts
+  - getProductBySku
+  summary: The four behaviour signals, the RecommendedProduct-vs-Product schema divergence, and how to resolve recommendations back to catalog records in one batched call.
+not_covered:
+- api: Best Buy Commerce API
+  reason: >-
+    Sales-gated. No public endpoints, methods or paths are published — full documentation is
+    released only after a CAPI key is issued — so no skill can be grounded in real operationIds.
+- api: Best Buy Categories API
+  reason: Documented but no OpenAPI captured in this repo; no verified operationIds to ground steps in.
+- api: Best Buy Buying Options (Open Box) API
+  reason: Documented but no OpenAPI captured in this repo; no verified operationIds to ground steps in.

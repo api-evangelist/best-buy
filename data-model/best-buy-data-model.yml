@@ -1,0 +1,196 @@
+generated: '2026-08-27'
+method: derived
+source: openapi/best-buy-products-api-openapi.yml, openapi/best-buy-stores-api-openapi.yml, openapi/best-buy-recommendations-api-openapi.yml
+description: >-
+  Entity graph derived from the components.schemas of the three captured Best Buy OpenAPI
+  documents. The model is shallow and denormalised by design: it is a read-only catalog
+  projection. Two primary identifiers anchor everything — `sku` (product) and `storeId`
+  (physical location) — and taxonomy is carried inline as a categoryPath array rather than as
+  a fetchable Category resource. Recommendations return a deliberately thinner product
+  projection (RecommendedProduct) than the catalog does (Product), so the two are not
+  interchangeable.
+identifiers:
+- name: sku
+  entity: Product
+  type: string/integer
+  note: >-
+    Best Buy's proprietary product key. Historically 10 digits for digital products, migrated to
+    7 digits from R17.4 (2017) — clients with SKU-length logic break on this. No GTIN/UPC field
+    is exposed, so there is no standard identifier to join on.
+- name: storeId
+  entity: Store
+  type: string/integer
+  note: Best Buy store number.
+- name: bestBuyItemID
+  entity: Product
+  type: string
+  deprecated: true
+  note: Deprecated in R16.2 (2016-03-01) and forced to an empty string.
+entities:
+- name: Product
+  source: products-api components.schemas.Product
+  primary_key: sku
+  fields:
+  - sku
+  - name
+  - regularPrice
+  - salePrice
+  - onSale
+  - manufacturer
+  - modelNumber
+  - shortDescription
+  - longDescription
+  - image
+  - url
+  - addToCartUrl
+  - inStoreAvailability
+  - onlineAvailability
+  - type
+  - class
+  - classId
+  - subclass
+  - subclassId
+  - department
+  - departmentId
+  - categoryPath
+  - customerReviewCount
+  - customerReviewAverage
+  - priceUpdateDate
+  note: >-
+    Carries its own merchandising hierarchy inline four ways — department/departmentId,
+    class/classId, subclass/subclassId, and categoryPath[] — which are parallel views of the
+    same taxonomy rather than distinct relationships.
+- name: CategoryRef
+  source: products-api components.schemas.CategoryRef
+  primary_key: id
+  fields:
+  - id
+  - name
+  note: >-
+    Reference-only shape embedded inside Product.categoryPath. There is no Category entity in the
+    captured specs — the Categories API exists in Best Buy's documentation but has no OpenAPI in
+    this repo, so category is a value here, not a fetchable resource.
+- name: Store
+  source: stores-api components.schemas.Store
+  primary_key: storeId
+  fields:
+  - storeId
+  - name
+  - longName
+  - address
+  - address2
+  - city
+  - state
+  - zipcode
+  - phone
+  - lat
+  - lng
+  - distance
+  - storeType
+  - hours
+  - gmtOffset
+  - services
+- name: StoreService
+  source: stores-api components.schemas.StoreService
+  primary_key: null
+  fields:
+  - service
+  note: Value object embedded in Store.services[].
+- name: RecommendedProduct
+  source: recommendations-api components.schemas.RecommendedProduct
+  primary_key: sku
+  fields:
+  - sku
+  - names
+  - images
+  - prices
+  - links
+  - rank
+  note: >-
+    A different, thinner projection of the same product identified by the same sku. Pluralised
+    container fields (names, images, prices, links) rather than the scalar name/image/url of
+    Product. Joining a recommendation back to full catalog data requires a second call to
+    getProductBySku.
+- name: ProductListResponse
+  source: products-api components.schemas.ProductListResponse
+  kind: envelope
+  fields:
+  - from
+  - to
+  - total
+  - currentPage
+  - totalPages
+  - queryTime
+  - totalTime
+  - partial
+  - canonicalUrl
+  - nextCursorMark
+  - products
+- name: StoreListResponse
+  source: stores-api components.schemas.StoreListResponse
+  kind: envelope
+  fields:
+  - from
+  - to
+  - total
+  - currentPage
+  - totalPages
+  - queryTime
+  - totalTime
+  - stores
+  note: Lacks nextCursorMark — deep cursor paging is available on products but not on stores.
+- name: RecommendationsResponse
+  source: recommendations-api components.schemas.RecommendationsResponse
+  kind: envelope
+  fields:
+  - metadata
+  - results
+  note: A third, incompatible envelope shape — neither the from/to/total form of the catalog envelopes nor a bare array.
+- name: ErrorResponse
+  source: all three specs
+  kind: error
+  fields:
+  - status
+  - error
+  - message
+  note: See errors/best-buy-problem-types.yml — the live API returns {errorCode,errorMessage} instead.
+relationships:
+- from: ProductListResponse
+  to: Product
+  type: has_many
+  via: products
+- from: Product
+  to: CategoryRef
+  type: has_many
+  via: categoryPath
+- from: StoreListResponse
+  to: Store
+  type: has_many
+  via: stores
+- from: Store
+  to: StoreService
+  type: has_many
+  via: services
+- from: RecommendationsResponse
+  to: RecommendedProduct
+  type: has_many
+  via: results
+- from: RecommendedProduct
+  to: Product
+  type: belongs_to
+  via: sku
+  note: Cross-spec join on the sku identifier. Not expressed as a $ref — the two schemas are independent definitions of the same real-world entity.
+- from: Product
+  to: Store
+  type: has_many
+  via: in-store availability by storeId
+  note: >-
+    Not modelled as a $ref in any captured spec. The Products and Stores APIs are joined at the
+    application layer through the in-store-availability query (added in R17.3, 2017-06-06),
+    which takes a sku plus a storeId or postalCode. This is the most commercially significant
+    relationship in the model and the least expressed in the contract.
+observations:
+- No entity carries a standard external identifier (GTIN/UPC/EAN/ASIN); everything joins on the proprietary sku.
+- Product and RecommendedProduct describe the same entity with different field names and cardinalities — a schema-reuse gap, not a data difference.
+- Three different response envelope shapes across three APIs from one provider.
+- Category is a value type here only because the Categories API has no captured OpenAPI; the documented API does expose 4,328+ categories as a hierarchy.
