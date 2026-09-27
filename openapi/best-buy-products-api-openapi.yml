@@ -292,19 +292,23 @@ components:
           description: Array of product objects.
           items:
             $ref: '#/components/schemas/Product'
-    CategoryRef:
-      title: CategoryRef
+    ErrorResponse:
+      title: ErrorResponse
       type: object
-      description: A reference to a product category in the hierarchy.
+      description: Error response returned when a request fails.
       properties:
-        id:
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        error:
           type: string
-          description: Category identifier.
-          example: abcat0500000
-        name:
+          description: Error type or code.
+          example: Bad Request
+        message:
           type: string
-          description: Category display name.
-          example: Computers & Tablets
+          description: Human-readable description of the error.
+          example: Invalid query parameter provided.
     Product:
       title: Product
       type: object
@@ -415,23 +419,19 @@ components:
           format: date-time
           description: Date and time the price was last updated.
           example: '2026-04-01T10:00:00Z'
-    ErrorResponse:
-      title: ErrorResponse
+    CategoryRef:
+      title: CategoryRef
       type: object
-      description: Error response returned when a request fails.
+      description: A reference to a product category in the hierarchy.
       properties:
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
-        error:
+        id:
           type: string
-          description: Error type or code.
-          example: Bad Request
-        message:
+          description: Category identifier.
+          example: abcat0500000
+        name:
           type: string
-          description: Human-readable description of the error.
-          example: Invalid query parameter provided.
+          description: Category display name.
+          example: Computers & Tablets
   securitySchemes:
     apiKey:
       type: apiKey
