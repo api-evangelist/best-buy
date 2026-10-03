@@ -210,15 +210,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    StoreService:
-      title: StoreService
-      type: object
-      description: A service offered at a Best Buy store.
-      properties:
-        service:
-          type: string
-          description: Name of the service offered.
-          example: Geek Squad
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -274,6 +265,15 @@ components:
           description: Array of store objects.
           items:
             $ref: '#/components/schemas/Store'
+    StoreService:
+      title: StoreService
+      type: object
+      description: A service offered at a Best Buy store.
+      properties:
+        service:
+          type: string
+          description: Name of the service offered.
+          example: Geek Squad
     Store:
       title: Store
       type: object

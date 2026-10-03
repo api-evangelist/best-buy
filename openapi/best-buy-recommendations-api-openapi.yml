@@ -289,6 +289,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      description: Error response returned when a request fails.
+      properties:
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        error:
+          type: string
+          description: Error type or code.
+          example: Bad Request
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Invalid query parameter provided.
     RecommendationsResponse:
       title: RecommendationsResponse
       type: object
@@ -369,23 +386,6 @@ components:
           type: integer
           description: Rank position in the recommendation list.
           example: 1
-    ErrorResponse:
-      title: ErrorResponse
-      type: object
-      description: Error response returned when a request fails.
-      properties:
-        status:
-          type: integer
-          description: HTTP status code.
-          example: 400
-        error:
-          type: string
-          description: Error type or code.
-          example: Bad Request
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Invalid query parameter provided.
   securitySchemes:
     apiKey:
       type: apiKey
