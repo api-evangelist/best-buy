@@ -210,6 +210,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    StoreService:
+      title: StoreService
+      type: object
+      description: A service offered at a Best Buy store.
+      properties:
+        service:
+          type: string
+          description: Name of the service offered.
+          example: Geek Squad
     ErrorResponse:
       title: ErrorResponse
       type: object
@@ -227,53 +236,6 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Invalid query parameter provided.
-    StoreListResponse:
-      title: StoreListResponse
-      type: object
-      description: Paginated list of Best Buy store locations.
-      properties:
-        from:
-          type: integer
-          description: Starting index of returned results.
-          example: 1
-        to:
-          type: integer
-          description: Ending index of returned results.
-          example: 5
-        total:
-          type: integer
-          description: Total number of matching stores.
-          example: 1587
-        currentPage:
-          type: integer
-          description: Current page number.
-          example: 1
-        totalPages:
-          type: integer
-          description: Total number of pages available.
-          example: 159
-        queryTime:
-          type: string
-          description: Time taken to execute the query in seconds.
-          example: '0.018'
-        totalTime:
-          type: string
-          description: Total response time in seconds.
-          example: '0.032'
-        stores:
-          type: array
-          description: Array of store objects.
-          items:
-            $ref: '#/components/schemas/Store'
-    StoreService:
-      title: StoreService
-      type: object
-      description: A service offered at a Best Buy store.
-      properties:
-        service:
-          type: string
-          description: Name of the service offered.
-          example: Geek Squad
     Store:
       title: Store
       type: object
@@ -353,6 +315,44 @@ components:
           description: Services offered at this store location.
           items:
             $ref: '#/components/schemas/StoreService'
+    StoreListResponse:
+      title: StoreListResponse
+      type: object
+      description: Paginated list of Best Buy store locations.
+      properties:
+        from:
+          type: integer
+          description: Starting index of returned results.
+          example: 1
+        to:
+          type: integer
+          description: Ending index of returned results.
+          example: 5
+        total:
+          type: integer
+          description: Total number of matching stores.
+          example: 1587
+        currentPage:
+          type: integer
+          description: Current page number.
+          example: 1
+        totalPages:
+          type: integer
+          description: Total number of pages available.
+          example: 159
+        queryTime:
+          type: string
+          description: Time taken to execute the query in seconds.
+          example: '0.018'
+        totalTime:
+          type: string
+          description: Total response time in seconds.
+          example: '0.032'
+        stores:
+          type: array
+          description: Array of store objects.
+          items:
+            $ref: '#/components/schemas/Store'
   securitySchemes:
     apiKey:
       type: apiKey
