@@ -173,6 +173,8 @@ apis:
   - type: Documentation
     url: https://bestbuyapis.github.io/api-documentation/#recommendations-api
 common:
+- type: FinOps
+  url: finops/best-buy-finops.yml
 - type: IssueTracker
   url: https://github.com/BestBuyAPIs/api-documentation/issues
 - type: ContributionGuide
