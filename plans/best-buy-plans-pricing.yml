@@ -91,3 +91,28 @@ plans:
 notes:
 - No pricing page exists at developer.bestbuy.com; /pricing and /plans are not published and the portal navigation carries only Our APIs, Documentation, Contact Us and Login.
 - Corrects the 2026-05-04 bulk-sweep record on this file, which described Best Buy as enterprise-contract-only and omitted the free self-serve developer key entirely.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  - request
+  plans:
+  - name: Developer Key (free)
+    access: free
+    model: subscription
+    model_how: derived
+    units:
+    - request
+    periods:
+    - day
+  - name: Commerce API (CAPI) Partner
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
