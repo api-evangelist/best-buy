@@ -306,27 +306,6 @@ components:
           type: string
           description: Human-readable description of the error.
           example: Invalid query parameter provided.
-    RecommendationsResponse:
-      title: RecommendationsResponse
-      type: object
-      description: Response containing recommended product list.
-      properties:
-        metadata:
-          type: object
-          description: Metadata about the result set.
-          properties:
-            resultSet:
-              type: object
-              properties:
-                count:
-                  type: integer
-                  description: Number of results returned.
-                  example: 10
-        results:
-          type: array
-          description: Array of recommended product objects.
-          items:
-            $ref: '#/components/schemas/RecommendedProduct'
     RecommendedProduct:
       title: RecommendedProduct
       type: object
@@ -386,6 +365,27 @@ components:
           type: integer
           description: Rank position in the recommendation list.
           example: 1
+    RecommendationsResponse:
+      title: RecommendationsResponse
+      type: object
+      description: Response containing recommended product list.
+      properties:
+        metadata:
+          type: object
+          description: Metadata about the result set.
+          properties:
+            resultSet:
+              type: object
+              properties:
+                count:
+                  type: integer
+                  description: Number of results returned.
+                  example: 10
+        results:
+          type: array
+          description: Array of recommended product objects.
+          items:
+            $ref: '#/components/schemas/RecommendedProduct'
   securitySchemes:
     apiKey:
       type: apiKey
