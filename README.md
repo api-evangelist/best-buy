@@ -1,4 +1,4 @@
-# Best Buy (best-buy)
+# Best Buy
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,205 +66,212 @@
 
 Best Buy is a multinational consumer electronics retailer offering technology products, services, and solutions through stores, online, and in-home consultations. Best Buy provides a developer API giving access to product data, store locations, categories, recommendations, open box offers, and commerce capabilities for partners and developers building retail integrations and applications.
 
-**URL:** [https://developer.bestbuy.com](https://developer.bestbuy.com)
+**Areas:** Fortune 100 · Retail · Consumer Electronics · E-Commerce · Product · Stores
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Best Buy on APIs.io
 
-## Tags:
+Everything profiled for Best Buy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/best-buy/](https://apis.io/providers/best-buy/)** — or go straight to one of the APIs or properties below.
 
- - Retail, Consumer Electronics, E-Commerce, Products, Stores
+### APIs (6)
 
-## Timestamps
+- [Best Buy Categories API](https://apis.io/apis/best-buy/categories-api/) — Navigate Best Buy's product taxonomy with access to 4,328+ product categories. Browse hierarchical category paths from root to specific categories and…
+- [Best Buy Buying Options (Open Box) API](https://apis.io/apis/best-buy/buying-options-api/) — Access discounted open box and Geek Squad certified refurbished merchandise with ship-from-store fulfillment. Supports single SKU, batch queries up to 100…
+- [Best Buy Commerce API](https://apis.io/apis/best-buy/commerce-api/) — Enable integrated shopping experiences for authorized partners with product availability lookups, shipping cost calculations, and order creation supporting…
+- [Best Buy Products API](https://apis.io/apis/best-buy/best-buy-products-api/) — Product catalog queries and retrieval
+- [Best Buy Recommendations API](https://apis.io/apis/best-buy/best-buy-recommendations-api/) — Customer behavior-based product recommendations
+- [Best Buy Stores API](https://apis.io/apis/best-buy/best-buy-stores-api/) — Best Buy store location and information queries
 
-- **Created:** 2026-04-19
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Best Buy Products API
-Access over one million current and historical Best Buy products with real-time pricing, availability, specifications, images, customer reviews, and categorization data. Supports detailed queries by SKU, keyword search, and filtering across all product attributes.
+#### GraphQL (1)
 
-**Human URL:** [https://bestbuyapis.github.io/api-documentation/#products-api](https://bestbuyapis.github.io/api-documentation/#products-api)
+GraphQL schemas.
 
-#### Tags:
+- [Moved to /providers/best-buy/](https://apis.io/graphqls/best-buy/best-buy-graphql/)
 
- - Products, Retail, Electronics, Pricing, Inventory
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://bestbuyapis.github.io/api-documentation/#products-api)
-- [OpenAPI](openapi/best-buy-products-api.yaml)
+- [Best Buy Agentic Access](https://apis.io/agentic-access/best-buy/best-buy-agentic-access/)
 
-### Best Buy Stores API
-Retrieve comprehensive store location and operational data for 1,587+ Best Buy locations across the United States and Puerto Rico. Supports area-based searches by postal code or latitude/longitude, store hours, services, and in-store product availability.
+#### JSON Schema (11)
 
-**Human URL:** [https://bestbuyapis.github.io/api-documentation/#stores-api](https://bestbuyapis.github.io/api-documentation/#stores-api)
+The data models the API reads and writes.
 
-#### Tags:
+- [CategoryRef](https://apis.io/schemas/best-buy/products-api-category-ref/)
+- [ErrorResponse](https://apis.io/schemas/best-buy/products-api-error-response/)
+- [Product](https://apis.io/schemas/best-buy/products-api-product/)
+- [ProductListResponse](https://apis.io/schemas/best-buy/products-api-product-list-response/)
+- [ErrorResponse](https://apis.io/schemas/best-buy/recommendations-api-error-response/)
+- [RecommendationsResponse](https://apis.io/schemas/best-buy/recommendations-api-recommendations-response/)
+- [RecommendedProduct](https://apis.io/schemas/best-buy/recommendations-api-recommended-product/)
+- [ErrorResponse](https://apis.io/schemas/best-buy/stores-api-error-response/)
+- [Store](https://apis.io/schemas/best-buy/stores-api-store/)
+- [StoreListResponse](https://apis.io/schemas/best-buy/stores-api-store-list-response/)
+- [StoreService](https://apis.io/schemas/best-buy/stores-api-store-service/)
 
- - Stores, Locations, Retail, Geolocation
+#### JSON Structure (11)
 
-#### Properties
+Data models expressed in JSON Structure.
 
-- [Documentation](https://bestbuyapis.github.io/api-documentation/#stores-api)
-- [OpenAPI](openapi/best-buy-stores-api.yaml)
+- [Products Api Category Ref Structure](https://apis.io/json-structure/best-buy/products-api-category-ref-structure/)
+- [Products Api Error Response Structure](https://apis.io/json-structure/best-buy/products-api-error-response-structure/)
+- [Products Api Product List Response Structure](https://apis.io/json-structure/best-buy/products-api-product-list-response-structure/)
+- [Products Api Product Structure](https://apis.io/json-structure/best-buy/products-api-product-structure/)
+- [Recommendations Api Error Response Structure](https://apis.io/json-structure/best-buy/recommendations-api-error-response-structure/)
+- [Recommendations Api Recommendations Response Structure](https://apis.io/json-structure/best-buy/recommendations-api-recommendations-response-structure/)
+- [Recommendations Api Recommended Product Structure](https://apis.io/json-structure/best-buy/recommendations-api-recommended-product-structure/)
+- [Stores Api Error Response Structure](https://apis.io/json-structure/best-buy/stores-api-error-response-structure/)
+- [Stores Api Store List Response Structure](https://apis.io/json-structure/best-buy/stores-api-store-list-response-structure/)
+- [Stores Api Store Service Structure](https://apis.io/json-structure/best-buy/stores-api-store-service-structure/)
+- [Stores Api Store Structure](https://apis.io/json-structure/best-buy/stores-api-store-structure/)
 
-### Best Buy Categories API
-Navigate Best Buy's product taxonomy with access to 4,328+ product categories. Browse hierarchical category paths from root to specific categories and integrate with product searches for category-specific filtering.
+#### JSON-LD (3)
 
-**Human URL:** [https://bestbuyapis.github.io/api-documentation/#categories-api](https://bestbuyapis.github.io/api-documentation/#categories-api)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags:
+- [Best Buy Products Api Context](https://apis.io/jsonld/best-buy/best-buy-products-api-context/)
+- [Best Buy Recommendations Api Context](https://apis.io/jsonld/best-buy/best-buy-recommendations-api-context/)
+- [Best Buy Stores Api Context](https://apis.io/jsonld/best-buy/best-buy-stores-api-context/)
 
- - Categories, Taxonomy, Products
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://bestbuyapis.github.io/api-documentation/#categories-api)
+- [Best Buy Vocabulary](https://apis.io/vocabularies/best-buy/best-buy-vocabulary/)
 
-### Best Buy Recommendations API
-Leverage customer behavior data to surface relevant products through trending products, most viewed, also viewed, also bought, and viewed-ultimately-bought recommendation types. Supports queries by category ID or specific SKU.
+#### Examples (11)
 
-**Human URL:** [https://bestbuyapis.github.io/api-documentation/#recommendations-api](https://bestbuyapis.github.io/api-documentation/#recommendations-api)
+Example requests and responses.
 
-#### Tags:
+- [Products Api Category Ref Example](https://apis.io/examples/best-buy/products-api-category-ref-example/)
+- [Products Api Error Response Example](https://apis.io/examples/best-buy/products-api-error-response-example/)
+- [Products Api Product Example](https://apis.io/examples/best-buy/products-api-product-example/)
+- [Products Api Product List Response Example](https://apis.io/examples/best-buy/products-api-product-list-response-example/)
+- [Recommendations Api Error Response Example](https://apis.io/examples/best-buy/recommendations-api-error-response-example/)
+- [Recommendations Api Recommendations Response Example](https://apis.io/examples/best-buy/recommendations-api-recommendations-response-example/)
+- [Recommendations Api Recommended Product Example](https://apis.io/examples/best-buy/recommendations-api-recommended-product-example/)
+- [Stores Api Error Response Example](https://apis.io/examples/best-buy/stores-api-error-response-example/)
+- [Stores Api Store Example](https://apis.io/examples/best-buy/stores-api-store-example/)
+- [Stores Api Store List Response Example](https://apis.io/examples/best-buy/stores-api-store-list-response-example/)
+- [Stores Api Store Service Example](https://apis.io/examples/best-buy/stores-api-store-service-example/)
 
- - Recommendations, Personalization, Products
+#### Collections (3)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://bestbuyapis.github.io/api-documentation/#recommendations-api)
-- [OpenAPI](openapi/best-buy-recommendations-api.yaml)
+- [Best Buy Products API](https://apis.io/collections/best-buy/open-best-buy-products-api/)
+- [Best Buy Products Recommendations API](https://apis.io/collections/best-buy/open-best-buy-recommendations-api/)
+- [Best Buy Products Stores API](https://apis.io/collections/best-buy/open-best-buy-stores-api/)
 
-### Best Buy Buying Options (Open Box) API
-Access discounted open box and Geek Squad certified refurbished merchandise with ship-from-store fulfillment. Supports single SKU, batch queries up to 100 SKUs, and category-based discovery with condition ratings updated every 5 minutes.
+#### Overlays (3)
 
-**Human URL:** [https://bestbuyapis.github.io/api-documentation/#buying-options-api](https://bestbuyapis.github.io/api-documentation/#buying-options-api)
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Tags:
+- [Best Buy Products Overlay](https://apis.io/overlays/best-buy/best-buy-products-overlay/)
+- [Best Buy Recommendations Overlay](https://apis.io/overlays/best-buy/best-buy-recommendations-overlay/)
+- [Best Buy Stores Overlay](https://apis.io/overlays/best-buy/best-buy-stores-overlay/)
 
- - Open Box, Refurbished, Discounts, Products
+#### Governance rules (2)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://bestbuyapis.github.io/api-documentation/#buying-options-api)
+- [Best Buy — jsonschema rules](https://apis.io/rules/best-buy/best-buy-jsonschema-spectral-rules/)
+- [Best Buy API Rules](https://apis.io/rules/best-buy/best-buy-spectral-rules/)
 
-### Best Buy Commerce API
-Enable integrated shopping experiences for authorized partners with product availability lookups, shipping cost calculations, and order creation supporting store pickup, ship-to-home, and home delivery fulfillment options.
+#### Security (3)
 
-**Human URL:** [https://bestbuyapis.github.io/api-documentation/#commerce-api](https://bestbuyapis.github.io/api-documentation/#commerce-api)
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags:
+- [Best Buy Authentication](https://apis.io/security/best-buy/best-buy-authentication/)
+- [Best Buy Domain Security](https://apis.io/security/best-buy/best-buy-domain-security/)
+- [Best Buy Vulnerability Disclosure](https://apis.io/security/best-buy/best-buy-vulnerability-disclosure/)
 
- - Commerce, Orders, Fulfillment, Partners
+#### Plans and pricing (1)
 
-#### Properties
+Published plans, tiers and prices.
 
-- [Documentation](https://bestbuyapis.github.io/api-documentation/#commerce-api)
+- [Best Buy Plans Pricing](https://apis.io/plans/best-buy/best-buy-plans-pricing/)
 
-## Common Properties
+#### Rate limits (1)
+
+Published request limits.
+
+- [Best Buy Rate Limits](https://apis.io/rate-limits/best-buy/best-buy-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Best Buy Finops](https://apis.io/finops/best-buy/best-buy-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.bestbuy.com)
-- [DeveloperPortal](https://developer.bestbuy.com)
 - [Documentation](https://bestbuyapis.github.io/api-documentation/)
-- [GettingStarted](https://bestbuyapis.github.io/api-documentation/#user-guide)
-- [Authentication](https://bestbuyapis.github.io/api-documentation/#authorization)
-- [SignUp](https://developer.bestbuy.com)
-- [GitHubOrganization](https://github.com/BestBuyAPIs)
-- [GitHubRepository](https://github.com/BestBuyAPIs/api-documentation)
-- [RateLimits](https://bestbuyapis.github.io/api-documentation/#rate-limiting)
-- [SpectralRules](rules/best-buy-spectral-rules.yml)
-- [NaftikoCapability](capabilities/retail-discovery.yaml)
-- [Vocabulary](vocabulary/best-buy-vocabulary.yaml)
+- [Getting started](https://bestbuyapis.github.io/api-documentation/#user-guide)
+- [API reference](https://bestbuyapis.github.io/api-documentation/#products-api)
+- [Support](https://developer.bestbuy.com/contact-us)
+- [Blog](https://corporate.bestbuy.com/feed/)
+- [Terms of service](https://developer.bestbuy.com/legal)
+- [GitHub](https://github.com/BestBuyAPIs)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Products API | Access to over one million products with real-time pricing, availability, and specifications. |
-| Stores API | Comprehensive data for 1,587+ US Best Buy locations including hours, services, and proximity search. |
-| Categories API | Navigate 4,328+ product categories with hierarchical taxonomy browsing. |
-| Recommendations API | Customer behavior-powered recommendations including trending, most viewed, also viewed, and also bought. |
-| Open Box API | Discounted open box and certified refurbished merchandise with condition ratings and availability. |
-| Commerce API | Partner-level shopping integration with order creation and fulfillment management. |
-| Query Builder | Interactive tool for constructing API queries without starting from scratch. |
-| JSON and XML Responses | Flexible response format support with JSON and XML output options. |
-| Pagination and Cursors | Page-based and cursor-mark pagination for large product datasets. |
-| Faceted Search | Summary aggregations by specified attributes with count limits for faceted browsing. |
+**Kin Score 50.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 21.9 |
+| Contract governance | 31.8 |
+| Operational transparency | 57.9 |
+| Developer ergonomics | 80.4 |
+| Access clarity | 44.7 |
 
-| Name | Description |
-|------|-------------|
-| Product Discovery | Full-text search and filtering across product descriptions, specifications, and reviews. |
-| Inventory Management | Real-time in-store availability checking by postal code or store ID. |
-| Recommendation Widgets | Display trending, most-viewed, and also-bought products on product detail pages. |
-| Store Locator | Proximity-based store search with hours verification and service availability. |
-| Open Box Sourcing | Identify discounted alternatives with transparent condition ratings. |
-| Price Monitoring | Track product price changes and availability updates. |
-| Retail Integration | Build shopping experiences integrated with Best Buy's product catalog and fulfillment. |
-| Affiliate Commerce | Commission-based product recommendations with affiliate partner integration. |
+**Agent readiness 36.5** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
 
-| Name | Description |
-|------|-------------|
-| Postman | Pre-built Postman collection available for testing and exploring Best Buy APIs. |
-| Impact Affiliate Network | Affiliate commission integration using Impact Partner ID for revenue attribution. |
+**Regulatory alignment 26.5** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/best-buy/](https://apis.io/providers/best-buy/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Best Buy Products API](openapi/best-buy-products-api.yaml)
-- [Best Buy Stores API](openapi/best-buy-stores-api.yaml)
-- [Best Buy Recommendations API](openapi/best-buy-recommendations-api.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Best Buy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [products-api-product-list-response-schema.json](json-schema/products-api-product-list-response-schema.json)
-- [products-api-product-schema.json](json-schema/products-api-product-schema.json)
-- [products-api-category-ref-schema.json](json-schema/products-api-category-ref-schema.json)
-- [stores-api-store-list-response-schema.json](json-schema/stores-api-store-list-response-schema.json)
-- [stores-api-store-schema.json](json-schema/stores-api-store-schema.json)
-- [stores-api-store-service-schema.json](json-schema/stores-api-store-service-schema.json)
-- [recommendations-api-recommendations-response-schema.json](json-schema/recommendations-api-recommendations-response-schema.json)
-- [recommendations-api-recommended-product-schema.json](json-schema/recommendations-api-recommended-product-schema.json)
-
-### JSON-LD
-
-- [best-buy-products-api-context.jsonld](json-ld/best-buy-products-api-context.jsonld)
-- [best-buy-stores-api-context.jsonld](json-ld/best-buy-stores-api-context.jsonld)
-- [best-buy-recommendations-api-context.jsonld](json-ld/best-buy-recommendations-api-context.jsonld)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Best Buy Products API](capabilities/shared/products-api.yaml) — 2 operations for product catalog access
-- [Best Buy Stores API](capabilities/shared/stores-api.yaml) — 2 operations for store location lookup
-- [Best Buy Recommendations API](capabilities/shared/recommendations-api.yaml) — 4 operations for behavioral recommendations
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Retail Discovery](capabilities/retail-discovery.yaml) | Products, Stores, Recommendations | 8 | Developer, Partner |
-
-## Vocabulary
-
-- [Best Buy Vocabulary](vocabulary/best-buy-vocabulary.yaml) — Unified taxonomy mapping 3 resources, 6 actions, 1 workflow, and 2 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Best Buy Spectral Rules](rules/best-buy-spectral-rules.yml) — 28 rules across 9 categories enforcing Best Buy API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/best-buy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
